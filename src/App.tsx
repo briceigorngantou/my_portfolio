@@ -7,7 +7,6 @@ import Competences from './pages/competences/Competences';
 import Contact from './pages/contact/Contact';
 import Experiences from './pages/experiences/Experiences';
 import Home from './pages/home/Home';
-import Navbar from './widgets/navbar/Navbar';
 import { themeSettings } from './configs/theme/theme';
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/skills" element={<Competences />} />

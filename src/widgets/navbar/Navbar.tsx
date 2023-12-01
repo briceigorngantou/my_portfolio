@@ -11,22 +11,24 @@ import {
   Toolbar,
   Typography
 } from '@mui/material';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { DarkMode, LightMode } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
-import { Pages } from '../../constants/data';
-import './navbar.css';
+import { cv, Pages } from '../../constants/data';
+import './style.css';
 import { setMode } from '../../state';
 
-const logo = require('../../assets/logo_light.png');
+const logo_light = require('../../assets/logo_light.png');
+const logo_dark = require('../../assets/logo_dark.png');
 
 export default function Navbar() {
   const navigate = useNavigate();
   const theme = useTheme();
-  const { dark } = theme.palette.secondary;
+  const { dark, main, light } = theme.palette.primary;
 
   const dispatch = useDispatch();
   // Use context
@@ -60,14 +62,15 @@ export default function Navbar() {
           display: 'flex',
           justifyContent: 'center',
           zIndex: 10,
-          opacity: 0.8,
+          opacity: 0.7,
           top: 5,
           maxWidth: 2000,
-          backgroundColor: theme.palette.secondary.light,
+          backgroundColor: theme.palette.mode === 'light' ? light : dark,
           position: 'fixed'
         }}
         className="navbar"
       >
+        {/* MOBILE SCREEN */}
         <Toolbar disableGutters sx={{ width: '100%' }}>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -76,7 +79,7 @@ export default function Navbar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              sx={{ color: theme.palette.primary.main }}
+              sx={{ color: main }}
             >
               <MenuIcon />
             </IconButton>
@@ -98,7 +101,7 @@ export default function Navbar() {
                 display: { xs: 'block', md: 'none' }
               }}
             >
-              {Pages.map((page, index) => (
+              {Pages.map((page) => (
                 <MenuItem
                   key={page.name}
                   onClick={() => {
@@ -106,48 +109,58 @@ export default function Navbar() {
                     handlePageSelected(page.link);
                   }}
                 >
-                  <Typography
-                    sx={{
-                      color:
-                        currentPage === index
-                          ? theme.palette.primary.main
-                          : theme.palette.secondary.main
-                    }}
-                    textAlign="center"
-                  >
-                    {page.name}
-                  </Typography>
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
               <MenuItem
-                key={'companyLogin'}
+                key={'cv'}
                 onClick={() => {
-                  navigate('/login');
+                  navigate(cv);
                 }}
               >
-                <Typography
-                  sx={{
-                    color: theme.palette.primary.main,
-                    // textDecoration: 'underline',
-                    cursor: 'pointer',
-                    '&:hover': {
-                      color: theme.palette.primary.main
-                    }
-                  }}
-                  textAlign="center"
+                <a
+                  href={cv}
+                  target="blank"
+                  style={{ textDecorationLine: 'none' }}
                 >
-                  Mon CV
-                </Typography>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <CloudDownloadIcon
+                      sx={{
+                        color: theme.palette.mode === 'light' ? main : light,
+                        fontSize: '22px',
+                        marginRight: 1
+                      }}
+                    />
+                    <Typography
+                      sx={{
+                        color: theme.palette.mode === 'light' ? main : light,
+                        cursor: 'pointer',
+                        '&:hover': {
+                          color: theme.palette.mode === 'light' ? main : light
+                        }
+                      }}
+                      textAlign="center"
+                    >
+                      Mon CV
+                    </Typography>
+                  </Box>
+                </a>
               </MenuItem>
               <MenuItem key={'theme'}>
                 <IconButton
                   onClick={() => dispatch(setMode())}
-                  sx={{ fontSize: '26px' }}
+                  sx={{ fontSize: '22px' }}
                 >
                   {theme.palette.mode === 'dark' ? (
-                    <DarkMode sx={{ fontSize: '26px' }} />
+                    <DarkMode sx={{ color: light, fontSize: '22px' }} />
                   ) : (
-                    <LightMode sx={{ color: dark, fontSize: '26px' }} />
+                    <LightMode sx={{ color: main, fontSize: '22px' }} />
                   )}
                 </IconButton>
               </MenuItem>
@@ -159,7 +172,7 @@ export default function Navbar() {
             component="div"
             sx={{
               flexGrow: 1,
-              color: theme.palette.primary.main,
+              color: main,
               display: { xs: 'flex', md: 'none' },
               textAlign: 'left'
             }}
@@ -170,11 +183,11 @@ export default function Navbar() {
             item
             sx={{
               cursor: 'pointer',
-              color: theme.palette.primary.main
+              color: main
             }}
           >
             <img
-              src={logo}
+              src={theme.palette.mode === 'light' ? logo_light : logo_dark}
               alt="logo"
               onClick={() => navigate('/')}
               style={{ width: '40%' }}
@@ -197,59 +210,66 @@ export default function Navbar() {
                 }}
                 sx={{
                   my: 2,
-                  color: theme.palette.primary.main,
+                  color: main,
                   borderBottomColor:
                     currentPage === index
                       ? {
                           '--Grid-borderWidth': '3px',
                           borderBottom: 'var(--Grid-borderWidth) solid',
-                          borderColor: theme.palette.primary.main
+                          borderColor: main
                         }
                       : undefined,
                   display: 'block',
-                  fontSize: 16,
+                  fontSize: 14,
                   marginX: 2,
                   fontWeight: 'bold',
                   ':hover': {
-                    color: theme.palette.primary.main,
+                    color: main,
                     '--Grid-borderWidth': '3px',
-                    borderColor: theme.palette.primary.main
+                    borderColor: main
                   }
                 }}
               >
                 {page.name}
               </Button>
             ))}
-            <Button
-              key={'company_login'}
-              onClick={() => {
-                navigate('/login');
-              }}
-              sx={{
-                my: 2,
-                color: theme.palette.primary.main,
-                display: 'block',
-                fontSize: 16,
-                marginX: 2,
-                fontWeight: 'bold',
-                '&:hover': {
-                  color: theme.palette.primary.main,
-                  '--Grid-borderWidth': '3px',
-                  borderColor: theme.palette.primary.main
-                },
-                cursor: 'pointer'
-              }}
-            >
-              Mon CV
-            </Button>
+            <a href={cv} target="blank" style={{ textDecorationLine: 'none' }}>
+              <Button
+                key={'cv'}
+                sx={{
+                  my: 2,
+                  color: main,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  fontSize: 16,
+                  marginX: 2,
+                  fontWeight: 'bold',
+                  '&:hover': {
+                    color: main,
+                    '--Grid-borderWidth': '3px',
+                    borderColor: main
+                  },
+                  cursor: 'pointer'
+                }}
+              >
+                <CloudDownloadIcon
+                  sx={{
+                    color: theme.palette.mode === 'light' ? main : light,
+                    fontSize: '22px',
+                    marginRight: 1
+                  }}
+                />
+                Mon CV
+              </Button>
+            </a>
             <IconButton
               onClick={() => dispatch(setMode())}
-              sx={{ fontSize: '26px' }}
+              sx={{ fontSize: '22px' }}
             >
               {theme.palette.mode === 'dark' ? (
-                <DarkMode sx={{ fontSize: '26px' }} />
+                <DarkMode sx={{ color: light, fontSize: '22px' }} />
               ) : (
-                <LightMode sx={{ color: dark, fontSize: '26px' }} />
+                <LightMode sx={{ color: main, fontSize: '22px' }} />
               )}
             </IconButton>
           </Grid>
