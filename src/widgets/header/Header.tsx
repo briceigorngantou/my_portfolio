@@ -52,7 +52,10 @@ export default function Header() {
             Salut !
           </Typography>
           <Typography fontSize={24} fontWeight={400} color={main}>
-            Moi c&apos;est <strong>Brice Ngantou</strong>
+            Moi c&apos;est{' '}
+            <strong style={{ color: theme.palette.secondary.main }}>
+              Brice Ngantou
+            </strong>
           </Typography>
           <br />
           <Typography fontSize={16} fontWeight={400} color={main}>
@@ -76,6 +79,7 @@ export default function Header() {
           <Grid
             sx={{
               textAlign: 'left',
+              display: 'flex',
               marginTop: 3,
               width: '80%',
               height: 150,
@@ -86,12 +90,12 @@ export default function Header() {
               <Button
                 variant="outlined"
                 sx={{
-                  height: 50,
+                  height: 40,
                   borderRadius: 1,
                   color: light,
-                  backgroundColor: dark,
+                  backgroundColor: theme.palette.secondary.dark,
                   ':hover': {
-                    color: dark,
+                    color: theme.palette.secondary.dark,
                     backgroundColor: light
                   }
                 }}
@@ -105,6 +109,24 @@ export default function Header() {
                 Télécharger mon CV
               </Button>
             </a>
+            <Button
+              variant="outlined"
+              onClick={() => navigate('/contact')}
+              sx={{
+                height: 40,
+                width: 100,
+                borderRadius: 1,
+                color: theme.palette.secondary.dark,
+                marginLeft: 2,
+                backgroundColor: light,
+                ':hover': {
+                  color: light,
+                  backgroundColor: theme.palette.secondary.dark
+                }
+              }}
+            >
+              Contact
+            </Button>
           </Grid>
         </Grid>
       </Grid>

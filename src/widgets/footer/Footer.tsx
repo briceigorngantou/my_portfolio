@@ -29,6 +29,7 @@ export default function Footer() {
   const navigate = useNavigate();
   const theme = useTheme();
   const { dark, main, light } = theme.palette.primary;
+  const bgcolor = theme.palette.background.paper;
 
   return (
     <Fragment>
@@ -40,7 +41,7 @@ export default function Footer() {
           bottom: 1,
           padding: 5,
           maxWidth: 2000,
-          backgroundColor: theme.palette.mode === 'light' ? light : dark
+          backgroundColor: bgcolor
         }}
         className="footer"
       >
