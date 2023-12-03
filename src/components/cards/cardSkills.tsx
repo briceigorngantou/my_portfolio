@@ -1,132 +1,129 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { DialogProps } from '@mui/material/Dialog';
-import CardMedia from '@mui/material/CardMedia';
-import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { CardActionArea, CardActions, Typography } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Badge, CardHeader, Divider, Grid, Typography } from '@mui/material';
 import { CardSkillsInterface } from '../../interfaces/cards/cardsSkills.interface';
-import DialogComponent from '../dialog/Dialog';
-import PrimaryButton from '../forms/PrimaryButton';
+import LabelIcon from '../labelIcon/LabelIcon';
 
 export default function CardSkills({
   style,
   title,
   picture,
-  text,
-  textPreviewLength,
   width,
   height,
-  pictureHeight,
-  pictureWidth,
   color,
   bgcolor,
-  noButton,
-  href
+  listItems,
+  certificate
 }: CardSkillsInterface) {
-  const navigate = useNavigate();
   const theme = useTheme();
-
-  const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <>
-      <Card
-        sx={{
-          maxWidth: width || 310,
-          height: height || 520,
-          margin: 3,
-          cursor: 'pointer',
-          style,
-          ':hover': {
-            color: color || theme.palette.primary.light,
-            transition: 'all 0.1ms linear',
-            width,
-            height
-          }
+      <Badge
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left'
         }}
-      >
-        <CardActionArea sx={{ maxHeight: '90%' }}>
-          <CardMedia
-            component="img"
-            height={pictureHeight || '250'}
-            width={pictureWidth}
-            image={picture}
-            alt="services-news images"
+        badgeContent={
+          <img
+            src={picture}
+            alt="icon"
             loading="lazy"
+            style={{
+              width: 80,
+              borderRadius: 20,
+              position: 'absolute',
+              left: width / 2,
+              translate: '-50%'
+            }}
           />
-          <CardContent>
-            <Typography
-              gutterBottom
-              textAlign={'center'}
-              variant="h6"
-              color={theme.palette.primary.main}
-            >
-              {title}
-            </Typography>
-            {text ? (
+        }
+        sx={{ margin: 3 }}
+      >
+        <Card
+          sx={{
+            width,
+            height,
+            style,
+            backgroundColor:
+              theme.palette.mode === 'light'
+                ? theme.palette.primary.light
+                : theme.palette.primary.dark,
+            color
+          }}
+        >
+          <CardHeader
+            sx={{
+              marginTop: 5,
+              textAlign: 'left'
+            }}
+            title={
               <Typography
-                variant="body1"
-                textAlign={'justify'}
-                color="text.secondary"
+                fontSize={20}
+                whiteSpace={'nowrap'}
+                color={theme.palette.primary.main}
+                fontWeight={500}
               >
-                {textPreviewLength && textPreviewLength < text.length
-                  ? `${text.slice(0, textPreviewLength)}...`
-                  : text}
+                {title}
               </Typography>
-            ) : null}
-          </CardContent>
-        </CardActionArea>
-        <CardActions sx={{ maxHeight: '10%' }}>
-          {noButton ? null : (
-            <PrimaryButton
-              title="View More"
-              variant="outlined"
-              fontSize={14}
-              fontWeight={500}
-              startIcon={<VisibilityIcon />}
-              onPress={() => {
-                setOpen(true);
-                setScroll('paper');
-              }}
-              style={{
-                width: '100%',
-                height: 40,
-                borderRadius: 1,
-                borderColor: theme.palette.primary.main,
-                borderWidth: 0.1,
-                color: color || theme.palette.primary.light,
-                backgroundColor: bgcolor || theme.palette.secondary.dark,
-                ':hover': {
-                  color: color || theme.palette.secondary.dark,
-                  backgroundColor: bgcolor || theme.palette.primary.light
-                }
-              }}
-            />
+            }
+          />
+          <Divider />
+          {certificate ? (
+            <Grid>
+              {listItems?.map((item, key) => (
+                <ul>
+                  <li key={key}>
+                    <Typography
+                      fontSize={16}
+                      color={theme.palette.primary.main}
+                    >
+                      {item?.label}
+                    </Typography>
+                  </li>
+                </ul>
+              ))}
+            </Grid>
+          ) : (
+            <CardContent sx={{ marginTop: 1 }}>
+              {listItems?.map((_, key) => (
+                <Grid
+                  xs={12}
+                  justifyContent="left"
+                  display={'flex'}
+                  marginBottom={1}
+                >
+                  <Grid xs={6} marginRight={1}>
+                    {key % 2 === 0 && key < listItems.length && (
+                      <LabelIcon
+                        iconImage={listItems[key]?.picture}
+                        mode={theme.palette.mode}
+                        color={theme.palette.primary.main}
+                        label={listItems[key]?.label}
+                      />
+                    )}
+                  </Grid>
+                  <Grid xs={6} marginLeft={1}>
+                    {(key + 1) % 2 !== 0 && key + 1 < listItems.length && (
+                      <LabelIcon
+                        iconImage={listItems[key + 1]?.picture}
+                        mode={theme.palette.mode}
+                        color={theme.palette.primary.main}
+                        label={listItems[key + 1]?.label}
+                      />
+                    )}
+                  </Grid>
+                </Grid>
+              ))}
+            </CardContent>
           )}
-        </CardActions>
-      </Card>
-      {open && (
-        <DialogComponent
-          text={text || 'No details found'}
-          title={'Details'}
-          action={() => navigate(href || '/contact')}
-          handleClose={handleClose}
-          open={open}
-          setOpen={setOpen}
-          scroll={scroll}
-          setScroll={setScroll}
-        />
-      )}
+        </Card>
+      </Badge>
     </>
   );
 }

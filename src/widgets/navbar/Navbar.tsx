@@ -11,7 +11,6 @@ import {
   Toolbar,
   Typography
 } from '@mui/material';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { DarkMode, LightMode } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -24,6 +23,7 @@ import { setMode } from '../../state';
 
 const logo_light = require('../../assets/logo_light.png');
 const logo_dark = require('../../assets/logo_dark.png');
+const downloadImage = require('../../assets/download-svgrepo-com.png');
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -130,12 +130,17 @@ export default function Navbar() {
                       alignItems: 'center'
                     }}
                   >
-                    <CloudDownloadIcon
+                    {/* <CloudDownloadIcon
                       sx={{
                         color: theme.palette.mode === 'light' ? main : light,
                         fontSize: '22px',
                         marginRight: 1
                       }}
+                    /> */}
+                    <img
+                      src={downloadImage}
+                      alt="icon"
+                      style={{ width: '26px', height: '26px', marginRight: 8 }}
                     />
                     <Typography
                       sx={{
@@ -252,12 +257,17 @@ export default function Navbar() {
                   cursor: 'pointer'
                 }}
               >
-                <CloudDownloadIcon
+                {/* <CloudDownloadIcon
                   sx={{
                     color: theme.palette.mode === 'light' ? main : light,
                     fontSize: '22px',
                     marginRight: 1
                   }}
+                /> */}
+                <img
+                  src={downloadImage}
+                  alt="icon"
+                  style={{ width: '26px', height: '26px', marginRight: 8 }}
                 />
                 Mon CV
               </Button>

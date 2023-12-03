@@ -2,12 +2,29 @@
 import React from 'react';
 import { Grid, Typography, useTheme } from '@mui/material';
 import Title from '../../components/title/Title';
-import CardSkills from '../../components/cards/cardSkills';
+import {
+  frameworks,
+  languages,
+  environnementDev,
+  others,
+  certificates
+} from '../../constants/skills.data';
+import CardSkills from '../../components/cards/CardSkills';
 
-const image = require('../../assets/logo_dark.png');
+const imageEnv_light = require('../../assets/env_light.png');
+const imageEnv_dark = require('../../assets/env_dark.png');
+const imageFrameworks_light = require('../../assets/frameworks_light.png');
+const imageFrameworks_dark = require('../../assets/frameworks_dark.png');
+const imageLanguages_light = require('../../assets/language_light.png');
+const imageLanguages_dark = require('../../assets/language_dark.png');
+const imageOther_light = require('../../assets/other_light.png');
+const imageOther_dark = require('../../assets/other_dark.png');
+const imageCertificate_light = require('../../assets/certificate_light.png');
+const imageCertificate_dark = require('../../assets/certificate_dark.png');
 
 export default function Skills() {
   const theme = useTheme();
+  const { light, main } = theme.palette.primary;
   return (
     <Grid
       container
@@ -17,7 +34,8 @@ export default function Skills() {
       <Grid
         sx={{ px: { xs: 2, md: 5 }, pb: { xs: 2, md: 3 } }}
         container
-        marginTop={10}
+        marginTop={12}
+        marginBottom={2}
         justifyContent="center"
       >
         <Title title="MES COMPÉTENCES" />
@@ -31,64 +49,77 @@ export default function Skills() {
       >
         <Grid sx={{ margin: 1 }}>
           <CardSkills
-            title={'Mobile applications'}
-            text={
-              'HandLit also offers mobile app development for iOS and Android platforms.' +
-              'Whether you need an app to promote your business, offer services to your customers or' +
-              ' provide specific functionality we can design and develop a custom mobile app to meet your needs.'
-            }
+            title={'LANGAGES DE PROGRAMMATION'}
             style={undefined}
-            picture={image}
-            textPreviewLength={180}
-            width={undefined}
-            height={undefined}
-            pictureHeight={undefined}
-            pictureWidth={undefined}
-            color={undefined}
-            noHover={undefined}
-            noButton={undefined}
+            picture={
+              theme.palette.mode === 'light'
+                ? imageLanguages_light
+                : imageLanguages_dark
+            }
+            width={550}
+            height={500}
+            color={main}
+            listItems={languages}
           />
         </Grid>
         <Grid sx={{ margin: 1 }}>
           <CardSkills
-            title={'SEA, paid search'}
-            text={
-              'Search Engine Advertising (SEA), also known as paid search, ' +
-              'is an online marketing strategy where you pay to display promotional ads in the search results ' +
-              'of search engines such as Google. HandLit offers to manage your SEA campaigns, choosing the right keywords, ' +
-              'creating attractive ads and optimizing your advertising budget to get the best return on investment.'
-            }
+            title={'FRAMEWORKS'}
             style={undefined}
-            picture={image}
-            textPreviewLength={180}
-            width={undefined}
-            height={undefined}
-            pictureHeight={undefined}
-            pictureWidth={undefined}
-            color={undefined}
-            noHover={undefined}
-            noButton={undefined}
+            picture={
+              theme.palette.mode === 'light'
+                ? imageFrameworks_light
+                : imageFrameworks_dark
+            }
+            width={550}
+            height={500}
+            color={main}
+            listItems={frameworks}
           />
         </Grid>
         <Grid sx={{ margin: 1 }}>
           <CardSkills
-            title={'SEO (Search Engine Optimization)'}
-            text={
-              "Search Engine Optimization (SEO) is a set of techniques designed to improve your website's visibility " +
-              'and ranking in organic search results. HandLit offers SEO services to help your site rank higher in search engines. ' +
-              'This includes keyword optimization, quality content creation, site structure improvement and other technical factors to ' +
-              "improve your company's online visibility."
-            }
+            title={'ENVIRONNEMENTS DE DÉVELOPPEMENT'}
             style={undefined}
-            picture={image}
-            textPreviewLength={180}
-            width={undefined}
-            height={undefined}
-            pictureHeight={undefined}
-            pictureWidth={undefined}
-            color={undefined}
-            noHover={undefined}
-            noButton={undefined}
+            picture={
+              theme.palette.mode === 'light' ? imageEnv_light : imageEnv_dark
+            }
+            width={550}
+            height={500}
+            color={main}
+            listItems={environnementDev}
+          />
+        </Grid>
+        <Grid sx={{ margin: 1 }}>
+          <CardSkills
+            title={'AUTRES TECHNOLOGIES'}
+            style={undefined}
+            picture={
+              theme.palette.mode === 'light'
+                ? imageOther_light
+                : imageOther_dark
+            }
+            width={550}
+            height={500}
+            bgcolor={light}
+            color={main}
+            listItems={others}
+          />
+        </Grid>
+        <Grid sx={{ margin: 1 }}>
+          <CardSkills
+            title={'MES CERTIFICATIONS'}
+            style={undefined}
+            picture={
+              theme.palette.mode === 'light'
+                ? imageCertificate_light
+                : imageCertificate_dark
+            }
+            width={550}
+            height={500}
+            color={main}
+            listItems={certificates}
+            certificate={true}
           />
         </Grid>
       </Grid>

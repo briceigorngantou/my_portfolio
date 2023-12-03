@@ -4,11 +4,11 @@ import React from 'react';
 import { Grid, Typography, useTheme, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import { cv, ecole_it_link } from '../../constants/data';
 
 const profil_light = require('../../assets/profil_light.png');
 const profil_dark = require('../../assets/profil_dark.png');
+const downloadImage = require('../../assets/download-svgrepo-com.png');
 
 export default function Header() {
   const theme = useTheme();
@@ -46,7 +46,7 @@ export default function Header() {
           xs={6}
           sm={4}
           md={4}
-          sx={{ marginTop: 20, textAlign: 'left', width: '70%' }}
+          sx={{ marginTop: 20, textAlign: 'left', width: '72%' }}
         >
           <Typography fontSize={24} fontWeight={400} color={main}>
             Salut !
@@ -67,8 +67,8 @@ export default function Header() {
             >
               l&apos;ECOLE-IT
             </a>
-            , je suis actuellement à la recherche d&apos;un stage ou d&apos;une
-            alternance en développement web & mobile.
+            &nbsp;à Orléans, je suis actuellement à la recherche d&apos;un stage
+            ou d&apos;une alternance en développement web & mobile.
           </Typography>
           <br />
           <Typography fontSize={16} fontWeight={400} color={main}>
@@ -100,11 +100,10 @@ export default function Header() {
                   }
                 }}
               >
-                <CloudDownloadIcon
-                  sx={{
-                    fontSize: '22px',
-                    marginRight: 1
-                  }}
+                <img
+                  src={downloadImage}
+                  alt="icon"
+                  style={{ width: '28px', height: '28px', marginRight: 8 }}
                 />
                 Télécharger mon CV
               </Button>

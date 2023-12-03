@@ -6,7 +6,8 @@ export default function LabelIcon({
   iconImage = '',
   mode = 'light',
   label = '',
-  uri = ''
+  uri = '',
+  color = ''
 }) {
   const theme = useTheme();
   const { main, light } = theme.palette.primary;
@@ -29,16 +30,14 @@ export default function LabelIcon({
           <img
             src={iconImage}
             alt="icon"
-            style={{ width: '26px', height: '26px', marginRight: 8 }}
+            style={{ width: '28px', height: '28px', marginRight: 8 }}
           />
           {label && (
             <Typography
+              whiteSpace={'nowrap'}
               sx={{
-                color: mode === 'light' ? main : light,
-                cursor: 'pointer',
-                '&:hover': {
-                  color: mode === 'light' ? main : light
-                }
+                color: color || (mode === 'light' ? main : light),
+                cursor: 'pointer'
               }}
               textAlign="center"
             >
@@ -51,16 +50,12 @@ export default function LabelIcon({
           <img
             src={iconImage}
             alt="icon"
-            style={{ width: '26px', height: '26px', marginRight: 8 }}
+            style={{ width: '28px', height: '28px', marginRight: 8 }}
           />
           {label && (
             <Typography
               sx={{
-                color: mode === 'light' ? main : light,
-                cursor: 'pointer',
-                '&:hover': {
-                  color: mode === 'light' ? main : light
-                }
+                color: color || (mode === 'light' ? main : light)
               }}
               textAlign="center"
             >

@@ -8,6 +8,7 @@ import ContactUs from '../../layouts/contactUs/ContactUs';
 export default function Competences() {
   const theme = useTheme();
   const { dark, light } = theme.palette.primary;
+
   return (
     <Grid
       container
