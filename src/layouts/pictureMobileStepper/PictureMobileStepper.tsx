@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import MobileStepper from '@mui/material/MobileStepper';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
@@ -19,6 +19,7 @@ function PictureMobileStepper({
   pictures
 }: PictureMobileStepperInterface) {
   const theme = useTheme();
+  const minWidth600 = useMediaQuery('(min-width:600px)');
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = pictures.length;
 
@@ -57,7 +58,7 @@ function PictureMobileStepper({
                 loading="lazy"
                 style={{
                   width,
-                  height: height || 400,
+                  height: minWidth600 ? height || 400 : 300,
                   textAlign: 'center'
                 }}
               />

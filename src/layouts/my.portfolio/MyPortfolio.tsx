@@ -71,7 +71,7 @@ export default function MyPortfolio() {
             website={websiteLinkHandIT}
             pictures={picturesHandIT}
             width={600}
-            height={600}
+            height={400}
             color={main}
             content={contentHandIt}
           />
@@ -84,7 +84,7 @@ export default function MyPortfolio() {
             pictures={picturesAvocat}
             width={600}
             website={websiteAvocat}
-            height={600}
+            height={400}
             color={main}
             content={contentAvocat}
           />
@@ -95,7 +95,7 @@ export default function MyPortfolio() {
             content={contentKclub}
             pictures={picturesKCLUB}
             width={600}
-            height={600}
+            height={400}
             company={'ST DIGITAL'}
             googlePlayLink={kclubApp}
             googlePlayImage={playStoreImg}
@@ -112,7 +112,7 @@ export default function MyPortfolio() {
             website={lsuWebsite}
             pictures={picturesLSU}
             width={600}
-            height={600}
+            height={400}
             color={main}
             content={contentLSU}
           />
@@ -127,7 +127,7 @@ export default function MyPortfolio() {
             googlePlayLink={rewardApp}
             googlePlayImage={playStoreImg}
             website={rewardWebsite}
-            height={600}
+            height={400}
             color={main}
             content={contentReward}
           />
@@ -139,7 +139,7 @@ export default function MyPortfolio() {
             content={contentAfrik}
             pictures={picturesAfrik}
             width={600}
-            height={600}
+            height={400}
             company={'ST DIGITAL'}
             googlePlayLink={afrikApp}
             googlePlayImage={playStoreImg}

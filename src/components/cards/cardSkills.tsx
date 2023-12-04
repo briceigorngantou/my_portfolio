@@ -5,7 +5,14 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { useTheme } from '@mui/material/styles';
-import { Badge, CardHeader, Divider, Grid, Typography } from '@mui/material';
+import {
+  Badge,
+  CardHeader,
+  Divider,
+  Grid,
+  Typography,
+  useMediaQuery
+} from '@mui/material';
 import { CardSkillsInterface } from '../../interfaces/cards/cardsSkills.interface';
 import LabelIcon from '../labelIcon/LabelIcon';
 
@@ -21,6 +28,7 @@ export default function CardSkills({
   certificate
 }: CardSkillsInterface) {
   const theme = useTheme();
+  const minWidth550 = useMediaQuery('(min-width:550px)');
 
   return (
     <>
@@ -30,26 +38,29 @@ export default function CardSkills({
           horizontal: 'left'
         }}
         badgeContent={
-          <img
-            src={picture}
-            alt="icon"
-            loading="lazy"
-            style={{
-              width: 80,
-              borderRadius: 20,
-              position: 'absolute',
-              left: width / 2,
-              translate: '-50%'
-            }}
-          />
+          minWidth550 && (
+            <img
+              src={picture}
+              alt="icon"
+              loading="lazy"
+              style={{
+                width: 80,
+                borderRadius: 20,
+                position: 'absolute',
+                left: width / 2,
+                translate: '-50%'
+              }}
+            />
+          )
         }
         sx={{ margin: 3 }}
       >
         <Card
           sx={{
-            width,
+            width: minWidth550 ? 550 : 330,
             height,
             borderRadius: 5,
+            paddingBottom: !minWidth550 ? 2 : 0,
             style,
             backgroundColor:
               theme.palette.mode === 'light'
@@ -66,7 +77,7 @@ export default function CardSkills({
             title={
               <Typography
                 fontSize={20}
-                whiteSpace={'nowrap'}
+                whiteSpace={minWidth550 ? 'nowrap' : undefined}
                 color={theme.palette.secondary.light}
                 fontWeight={500}
               >

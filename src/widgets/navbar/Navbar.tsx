@@ -26,6 +26,7 @@ import { setMode } from '../../state';
 const logo_light = require('../../assets/logo_light.png');
 const logo_dark = require('../../assets/logo_dark.png');
 const downloadImage = require('../../assets/download-svgrepo-com.png');
+const downloadImageDark = require('../../assets/download-svgrepo-com (2).png');
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -134,7 +135,11 @@ export default function Navbar() {
                     }}
                   >
                     <img
-                      src={downloadImage}
+                      src={
+                        theme.palette.mode === 'light'
+                          ? downloadImage
+                          : downloadImageDark
+                      }
                       alt="icon"
                       style={{ width: '26px', height: '26px', marginRight: 8 }}
                     />
@@ -171,6 +176,7 @@ export default function Navbar() {
             variant="h6"
             noWrap
             component="div"
+            paddingRight={'50%'}
             sx={{
               flexGrow: 1,
               color: main,
@@ -210,7 +216,7 @@ export default function Navbar() {
                   handlePageSelected(page.link);
                 }}
                 sx={{
-                  my: 2,
+                  my: 1,
                   color: main,
                   borderBottomColor:
                     currentPage === index
@@ -238,7 +244,7 @@ export default function Navbar() {
               <Button
                 key={'cv'}
                 sx={{
-                  my: 2,
+                  my: 1,
                   color: main,
                   display: 'flex',
                   justifyContent: 'center',
@@ -254,7 +260,11 @@ export default function Navbar() {
                 }}
               >
                 <img
-                  src={downloadImage}
+                  src={
+                    theme.palette.mode === 'light'
+                      ? downloadImage
+                      : downloadImageDark
+                  }
                   alt="icon"
                   style={{ width: '26px', height: '26px', marginRight: 8 }}
                 />

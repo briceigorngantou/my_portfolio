@@ -2,7 +2,13 @@
 /* eslint-disable no-unused-vars */
 import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Grid, Typography, useTheme } from '@mui/material';
+import {
+  Container,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material';
 
 import {
   email,
@@ -28,6 +34,7 @@ const githubIcon = require('../../assets/github-color-svgrepo-com.png');
 export default function Footer() {
   const navigate = useNavigate();
   const theme = useTheme();
+  const minWidth600 = useMediaQuery('(min-width:600px)');
   const { dark, main, light } = theme.palette.primary;
   const bgcolor = theme.palette.background.paper;
 
@@ -114,43 +121,59 @@ export default function Footer() {
                 mode={theme.palette.mode}
                 label={address}
               />
+              {!minWidth600 && (
+                <>
+                  <LabelIcon
+                    iconImage={linkedinIcon}
+                    mode={theme.palette.mode}
+                    uri={linkedin}
+                  />
+                  <LabelIcon
+                    iconImage={githubIcon}
+                    mode={theme.palette.mode}
+                    uri={github}
+                  />
+                </>
+              )}
             </Grid>
           </Grid>
-          <Grid xs={3}>
-            <Grid
-              item
-              sx={{
-                color: main,
-                textAlign: 'left',
-                marginBottom: 3
-              }}
-            >
-              <Typography fontWeight={'bold'} fontSize={20}>
-                Mes réseaux
-              </Typography>
+          {minWidth600 && (
+            <Grid xs={3}>
+              <Grid
+                item
+                sx={{
+                  color: main,
+                  textAlign: 'left',
+                  marginBottom: 3
+                }}
+              >
+                <Typography fontWeight={'bold'} fontSize={20}>
+                  Mes réseaux
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                sx={{
+                  color: main,
+                  textAlign: 'left',
+                  marginBottom: 3,
+                  flexDirection: 'row',
+                  display: 'flex'
+                }}
+              >
+                <LabelIcon
+                  iconImage={linkedinIcon}
+                  mode={theme.palette.mode}
+                  uri={linkedin}
+                />
+                <LabelIcon
+                  iconImage={githubIcon}
+                  mode={theme.palette.mode}
+                  uri={github}
+                />
+              </Grid>
             </Grid>
-            <Grid
-              item
-              sx={{
-                color: main,
-                textAlign: 'left',
-                marginBottom: 3,
-                flexDirection: 'row',
-                display: 'flex'
-              }}
-            >
-              <LabelIcon
-                iconImage={linkedinIcon}
-                mode={theme.palette.mode}
-                uri={linkedin}
-              />
-              <LabelIcon
-                iconImage={githubIcon}
-                mode={theme.palette.mode}
-                uri={github}
-              />
-            </Grid>
-          </Grid>
+          )}
           <Grid item container justifyContent="center" width={'90%'}>
             <Typography variant="body1" align="center" color={main}>
               &copy;{new Date().getFullYear()} Tout droit reservé à &nbsp;Brice

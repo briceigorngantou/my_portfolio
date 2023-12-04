@@ -1,11 +1,13 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import CircleIcon from '@mui/icons-material/Circle';
-import { Divider, Grid, Typography } from '@mui/material';
+import { Divider, Grid, Typography, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 export default function Title({ title = '' }) {
   const theme = useTheme();
+  const minWidth625 = useMediaQuery('(min-width:625px)');
   const { main } = theme.palette.primary;
   return (
     <>
@@ -16,7 +18,7 @@ export default function Title({ title = '' }) {
               fontSize={30}
               fontWeight={'bold'}
               color={theme.palette.secondary.light}
-              whiteSpace={'nowrap'}
+              whiteSpace={minWidth625 ? 'nowrap' : undefined}
             >
               {title}
             </Typography>

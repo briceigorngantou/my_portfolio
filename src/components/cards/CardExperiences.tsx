@@ -8,6 +8,7 @@ import {
   Divider,
   Grid,
   Typography,
+  useMediaQuery,
   useTheme
 } from '@mui/material';
 import React from 'react';
@@ -27,15 +28,18 @@ export default function CardExperiences({
   content,
   mission
 }: CardExperiencesInterface) {
+  const minWidth625 = useMediaQuery('(min-width:625px)');
   const theme = useTheme();
   return (
     <Card
       sx={{
-        width,
-        height,
+        maxWidth: width,
+        minWidth: 350,
+        height: minWidth625 ? height : undefined,
         style,
         borderRadius: 5,
         padding: 2,
+        marginBottom: 3,
         backgroundColor:
           theme.palette.mode === 'light'
             ? theme.palette.primary.light
@@ -53,7 +57,7 @@ export default function CardExperiences({
             <Grid xs={6} marginRight={1}>
               <Typography
                 fontSize={20}
-                whiteSpace={'nowrap'}
+                whiteSpace={minWidth625 ? 'nowrap' : undefined}
                 color={theme.palette.secondary.light}
                 fontWeight={500}
               >

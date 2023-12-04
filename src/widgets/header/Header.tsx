@@ -16,6 +16,7 @@ import { cv, ecole_it_link } from '../../constants/data';
 const profil_light = require('../../assets/profil_light.png');
 const profil_dark = require('../../assets/profil_dark.png');
 const downloadImage = require('../../assets/download-svgrepo-com.png');
+const downloadImageDark = require('../../assets/download-svgrepo-com (2).png');
 
 export default function Header() {
   const matches = useMediaQuery('(min-width:900px)');
@@ -111,7 +112,11 @@ export default function Header() {
                 }}
               >
                 <img
-                  src={downloadImage}
+                  src={
+                    theme.palette.mode === 'light'
+                      ? downloadImage
+                      : downloadImageDark
+                  }
                   alt="icon"
                   style={{ width: '28px', height: '28px', marginRight: 8 }}
                 />

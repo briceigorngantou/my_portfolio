@@ -9,20 +9,16 @@ import {
   Divider,
   Grid,
   Typography,
+  useMediaQuery,
   useTheme
 } from '@mui/material';
 import React from 'react';
 import { CardPortfolioInterface } from '../../interfaces/cards/cardsPortfolio.interface';
 import PictureMobileStepper from '../../layouts/pictureMobileStepper/PictureMobileStepper';
-import LabelIcon from '../labelIcon/LabelIcon';
-import Title from '../title/Title';
 
 export default function CardPortfolio({
   style,
   title,
-  subtitle,
-  location,
-  date,
   company,
   pictures,
   width,
@@ -35,10 +31,11 @@ export default function CardPortfolio({
   website
 }: CardPortfolioInterface) {
   const theme = useTheme();
+  const minWidth600 = useMediaQuery('(min-width:600px)');
   return (
     <Card
       sx={{
-        width,
+        width: minWidth600 ? width : 350,
         // height,
         style,
         padding: 2,
@@ -50,7 +47,11 @@ export default function CardPortfolio({
         color
       }}
     >
-      <PictureMobileStepper pictures={pictures} width={width} />
+      <PictureMobileStepper
+        pictures={pictures}
+        width={minWidth600 ? width : 350}
+        height={minWidth600 ? height : 300}
+      />
       <Divider />
       <CardHeader
         sx={{
@@ -62,7 +63,7 @@ export default function CardPortfolio({
             <Grid xs={6}>
               <Typography
                 fontSize={18}
-                whiteSpace={'nowrap'}
+                whiteSpace={minWidth600 ? 'nowrap' : undefined}
                 color={theme.palette.secondary.light}
                 fontWeight={500}
               >
