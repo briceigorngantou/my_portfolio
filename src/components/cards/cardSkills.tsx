@@ -49,6 +49,7 @@ export default function CardSkills({
           sx={{
             width,
             height,
+            borderRadius: 5,
             style,
             backgroundColor:
               theme.palette.mode === 'light'
@@ -66,7 +67,7 @@ export default function CardSkills({
               <Typography
                 fontSize={20}
                 whiteSpace={'nowrap'}
-                color={theme.palette.primary.main}
+                color={theme.palette.secondary.light}
                 fontWeight={500}
               >
                 {title}
@@ -75,20 +76,28 @@ export default function CardSkills({
           />
           <Divider />
           {certificate ? (
-            <Grid>
-              {listItems?.map((item, key) => (
-                <ul>
-                  <li key={key}>
-                    <Typography
-                      fontSize={16}
-                      color={theme.palette.primary.main}
-                    >
-                      {item?.label}
-                    </Typography>
-                  </li>
-                </ul>
-              ))}
-            </Grid>
+            <CardContent sx={{ marginTop: 1, textAlign: 'left' }}>
+              <Grid
+                xs={12}
+                justifyContent="left"
+                marginBottom={1}
+                marginRight={1}
+              >
+                {listItems?.map((item, key) => (
+                  <LabelIcon
+                    key={key}
+                    iconImage={item?.pic}
+                    mode={theme.palette.mode}
+                    color={theme.palette.primary.main}
+                    label={item?.label}
+                    uri={item?.link}
+                    whiteSpace={false}
+                    marginLeft={2}
+                    uriDisable={false}
+                  />
+                ))}
+              </Grid>
+            </CardContent>
           ) : (
             <CardContent sx={{ marginTop: 1 }}>
               {listItems?.map((_, key) => (

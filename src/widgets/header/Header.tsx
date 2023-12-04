@@ -1,7 +1,14 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Grid, Typography, useTheme, Button, Box } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  useTheme,
+  Button,
+  Box,
+  useMediaQuery
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import { cv, ecole_it_link } from '../../constants/data';
@@ -11,6 +18,7 @@ const profil_dark = require('../../assets/profil_dark.png');
 const downloadImage = require('../../assets/download-svgrepo-com.png');
 
 export default function Header() {
+  const matches = useMediaQuery('(min-width:900px)');
   const theme = useTheme();
   const navigate = useNavigate();
   const { dark, main, light } = theme.palette.primary;
@@ -24,23 +32,25 @@ export default function Header() {
         justifyContent="center"
         alignItems={'center'}
       >
-        <Grid item xs={6} sm={4} md={4} sx={{ textAlign: 'right' }}>
-          {theme.palette.mode === 'dark' ? (
-            <img
-              src={profil_dark}
-              alt="profil image"
-              loading="lazy"
-              style={{ width: '70%' }}
-            />
-          ) : (
-            <img
-              src={profil_light}
-              alt="profil image"
-              loading="lazy"
-              style={{ width: '70%' }}
-            />
-          )}
-        </Grid>
+        {matches && (
+          <Grid item xs={6} sm={4} md={4} sx={{ textAlign: 'right' }}>
+            {theme.palette.mode === 'dark' ? (
+              <img
+                src={profil_dark}
+                alt="profil image"
+                loading="lazy"
+                style={{ width: '70%' }}
+              />
+            ) : (
+              <img
+                src={profil_light}
+                alt="profil image"
+                loading="lazy"
+                style={{ width: '70%' }}
+              />
+            )}
+          </Grid>
+        )}
         <Grid
           item
           xs={6}
@@ -53,7 +63,7 @@ export default function Header() {
           </Typography>
           <Typography fontSize={24} fontWeight={400} color={main}>
             Moi c&apos;est{' '}
-            <strong style={{ color: theme.palette.secondary.main }}>
+            <strong style={{ color: theme.palette.secondary.light }}>
               Brice Ngantou
             </strong>
           </Typography>

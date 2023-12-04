@@ -23,8 +23,8 @@ export default function MyExperience() {
       <Grid
         sx={{ px: { xs: 2, md: 5 }, pb: { xs: 2, md: 3 } }}
         container
-        marginTop={12}
-        marginBottom={2}
+        marginTop={15}
+        marginBottom={3}
         justifyContent="center"
       >
         <Title title="MES EXPÉRIENCES PROFESSIONNELLES" />
@@ -76,7 +76,7 @@ export default function MyExperience() {
             mission={missionLSU}
             width={600}
             height={700}
-            company={'LetServU'}
+            company={'LSU TECH'}
             bgcolor={light}
             color={main}
           />

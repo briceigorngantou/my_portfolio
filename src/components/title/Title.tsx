@@ -15,12 +15,15 @@ export default function Title({ title = '' }) {
             <Typography
               fontSize={30}
               fontWeight={'bold'}
-              color={main}
+              color={theme.palette.secondary.light}
               whiteSpace={'nowrap'}
             >
               {title}
             </Typography>
-            <CircleIcon fontSize="large" sx={{ color: main, marginTop: 2 }} />
+            <CircleIcon
+              fontSize="large"
+              sx={{ color: theme.palette.secondary.light, marginTop: 2 }}
+            />
           </Grid>
         </Grid>
       )}

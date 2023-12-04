@@ -22,28 +22,3 @@ export const Pages = [
 ];
 
 export const BASE_URL = 'https://lsu-tech-web-server-dev.herokuapp.com';
-
-const homeImage1 = require('../assets/address-svgrepo-com.png');
-const homeImage2 = require('../assets/github-color-svgrepo-com.png');
-const homeImage3 = require('../assets/address_dark.png');
-const homeImage4 = require('../assets/linkedin-svgrepo-com.png');
-
-export const imageHome = [
-  {
-    label: 'We bring your projects to life.',
-    imgPath: homeImage1
-  },
-  {
-    label: 'We support you in your digital transformation project.',
-    imgPath: homeImage2
-  },
-  {
-    label:
-      'An experienced team, passionate about new technologies, at your service.',
-    imgPath: homeImage3
-  },
-  {
-    label: 'We support you in your digital transformation project.',
-    imgPath: homeImage4
-  }
-];

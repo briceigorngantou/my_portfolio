@@ -7,7 +7,10 @@ export default function LabelIcon({
   mode = 'light',
   label = '',
   uri = '',
-  color = ''
+  color = '',
+  whiteSpace = true,
+  marginLeft = 0,
+  uriDisable = true
 }) {
   const theme = useTheme();
   const { main, light } = theme.palette.primary;
@@ -25,7 +28,10 @@ export default function LabelIcon({
         <a
           href={uri}
           target="blank"
-          style={{ display: 'flex', textDecorationLine: 'none' }}
+          style={{
+            display: 'flex',
+            textDecorationLine: uriDisable ? 'none' : 'underline'
+          }}
         >
           <img
             src={iconImage}
@@ -34,12 +40,13 @@ export default function LabelIcon({
           />
           {label && (
             <Typography
-              whiteSpace={'nowrap'}
+              whiteSpace={whiteSpace ? 'nowrap' : undefined}
               sx={{
                 color: color || (mode === 'light' ? main : light),
-                cursor: 'pointer'
+                cursor: 'pointer',
+                marginLeft
               }}
-              textAlign="center"
+              textAlign="left"
             >
               {label}
             </Typography>

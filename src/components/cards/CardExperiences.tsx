@@ -24,8 +24,6 @@ export default function CardExperiences({
   width,
   height,
   color,
-  bgcolor,
-  listItems,
   content,
   mission
 }: CardExperiencesInterface) {
@@ -36,6 +34,8 @@ export default function CardExperiences({
         width,
         height,
         style,
+        borderRadius: 5,
+        padding: 2,
         backgroundColor:
           theme.palette.mode === 'light'
             ? theme.palette.primary.light
@@ -54,13 +54,14 @@ export default function CardExperiences({
               <Typography
                 fontSize={20}
                 whiteSpace={'nowrap'}
-                color={theme.palette.secondary.main}
+                color={theme.palette.secondary.light}
                 fontWeight={500}
               >
                 {title}
                 <Typography
                   fontSize={10}
                   fontStyle={'italic'}
+                  sx={{ opacity: 0.6 }}
                   color={theme.palette.primary.main}
                   whiteSpace={'nowrap'}
                 >
@@ -86,6 +87,7 @@ export default function CardExperiences({
                 <Typography
                   fontSize={10}
                   fontStyle={'italic'}
+                  sx={{ opacity: 0.6 }}
                   color={theme.palette.primary.main}
                   whiteSpace={'nowrap'}
                 >
@@ -101,7 +103,7 @@ export default function CardExperiences({
         <Typography
           fontWeight={500}
           fontSize={16}
-          color={theme.palette.primary.main}
+          color={theme.palette.secondary.light}
           whiteSpace={'nowrap'}
         >
           Missions :
@@ -113,7 +115,7 @@ export default function CardExperiences({
         <Typography
           fontWeight={500}
           fontSize={16}
-          color={theme.palette.primary.main}
+          color={theme.palette.secondary.light}
           whiteSpace={'nowrap'}
         >
           Tâches :

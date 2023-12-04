@@ -4,15 +4,17 @@ export const colorsTokens = {
     200: '#FFFFFF',
     300: '#4b4b4b',
     400: '#000000',
-    500: '#F7F4F6',
-    600: '#222222'
+    500: '#f1f7fc',
+    600: '#222222',
+    700: '#2196f3'
   },
   grey: {
     100: '#f1f7fc',
     200: '#000000',
     300: '#474245',
     400: '#4b4b4b',
-    500: '#212121'
+    500: '#212121',
+    600: '#EDB96F'
   }
 };
 
@@ -29,7 +31,7 @@ export const themeSettings = (mode: any) => ({
           secondary: {
             dark: colorsTokens.grey[400],
             main: colorsTokens.primary[500],
-            light: colorsTokens.grey[200]
+            light: colorsTokens.grey[600]
           },
           background: {
             default: colorsTokens.grey[200],
@@ -46,7 +48,7 @@ export const themeSettings = (mode: any) => ({
           secondary: {
             dark: colorsTokens.grey[300],
             main: colorsTokens.grey[300],
-            light: colorsTokens.grey[200]
+            light: colorsTokens.primary[700]
           },
           background: {
             default: colorsTokens.grey[300],

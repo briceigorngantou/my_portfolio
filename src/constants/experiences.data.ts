@@ -1,3 +1,4 @@
+// STD
 export const contentST = [
   {
     label:
@@ -16,6 +17,9 @@ export const contentST = [
       'Administration de la base de données, création des différentes API Rest et GraphQL, et integration'
   },
   {
+    label: 'Déploiement des differentes solutions sur nginx'
+  },
+  {
     label:
       'Ecriture des tests unitaires puis configuration des serveurs nginx/apache, déploiement et maintenance évolutives des solutions.'
   }
@@ -23,6 +27,7 @@ export const contentST = [
 export const missionST =
   'Conception et développement d’applications web & mobile complètes de ST Digital de ses clients et de ses partenaires';
 
+// ORANGE
 export const contentOR = [
   {
     label: 'Modélisation objet et création de la base de données'
@@ -37,6 +42,7 @@ export const contentOR = [
 export const missionOr =
   "Conception d'une plateforme de gestion des ordres de mission des employés d'Orange Cameroun";
 
+// LSU TECH
 export const contentLSU = [
   {
     label:
@@ -45,6 +51,13 @@ export const contentLSU = [
   {
     label:
       'Conception et développement d’une application mobile de gestion de stocks'
+  },
+  {
+    label:
+      "Conception, développement et déploiement du site web de l'avocat inscrit au barreau de Nîmes Jean Faustin Kamdem"
+  },
+  {
+    label: "Conception, développement du site web de l'application LetServU"
   }
 ];
 

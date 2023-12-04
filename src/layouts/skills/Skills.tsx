@@ -34,8 +34,8 @@ export default function Skills() {
       <Grid
         sx={{ px: { xs: 2, md: 5 }, pb: { xs: 2, md: 3 } }}
         container
-        marginTop={12}
-        marginBottom={2}
+        marginTop={15}
+        marginBottom={3}
         justifyContent="center"
       >
         <Title title="MES COMPÉTENCES" />

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { Fragment, useLayoutEffect, useState } from 'react';
 import {
@@ -9,7 +10,8 @@ import {
   Menu,
   MenuItem,
   Toolbar,
-  Typography
+  Typography,
+  useMediaQuery
 } from '@mui/material';
 import { DarkMode, LightMode } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
@@ -46,6 +48,7 @@ export default function Navbar() {
   const handlePageSelected = (redirectTo: any) => {
     navigate(redirectTo);
   };
+  const matches = useMediaQuery('(min-width:900px)');
 
   // Get the current page
   useLayoutEffect(() => {
@@ -130,13 +133,6 @@ export default function Navbar() {
                       alignItems: 'center'
                     }}
                   >
-                    {/* <CloudDownloadIcon
-                      sx={{
-                        color: theme.palette.mode === 'light' ? main : light,
-                        fontSize: '22px',
-                        marginRight: 1
-                      }}
-                    /> */}
                     <img
                       src={downloadImage}
                       alt="icon"
@@ -257,13 +253,6 @@ export default function Navbar() {
                   cursor: 'pointer'
                 }}
               >
-                {/* <CloudDownloadIcon
-                  sx={{
-                    color: theme.palette.mode === 'light' ? main : light,
-                    fontSize: '22px',
-                    marginRight: 1
-                  }}
-                /> */}
                 <img
                   src={downloadImage}
                   alt="icon"

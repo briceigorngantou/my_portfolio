@@ -37,6 +37,8 @@ const ml = require('../assets/chip-intelligence-processor-svgrepo-com.png');
 const firebase = require('../assets/firebase-svgrepo-com.png');
 const cloudinary = require('../assets/cloudinary-svgrepo-com.png');
 const scrum = require('../assets/scrum.png');
+const oracle = require('../assets/oracle-svgrepo-com.png');
+const ibm = require('../assets/ibm-logo-svgrepo-com.png');
 const linux = require('../assets/linux.png');
 const nginx = require('../assets/nginx-svgrepo-com.png');
 
@@ -219,18 +221,26 @@ export const others = [
 export const certificates = [
   {
     label:
-      'Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate (Machine learning, deep learning)'
+      'IBM Certification Docker (déploiement, gestion, mise en réseau, sécurité des applications dans des environnements conteneurisés)',
+    pic: ibm,
+    link: 'https://drive.google.com/file/d/1cuA5PzkQg6RY0OEyVJ14TfBrdLaFaCiL/view?usp=sharing'
   },
   {
     label:
-      'IBM Certification Docker (déploiement, gestion, mise en réseau, sécurité des applications dans des environnements conteneurisés)'
+      'Oracle Cloud Infrastructure 2023 AI Certified Foundations Associate (Machine learning, deep learning)',
+    pic: oracle,
+    link: 'https://drive.google.com/file/d/1zJonutJrDOeL7w_5CIf4cMKZ0586Zfs7/view?usp=sharing'
   },
   {
     label:
-      'IBM Certification SQL Databases (gestion et administrations des bases de données relationnelles)'
+      'IBM Certification SQL Databases (gestion et administrations des bases de données relationnelles)',
+    pic: ibm,
+    link: 'https://drive.google.com/file/d/1f83IuiQutA6eZV90TFfwosJVS8PCWyMK/view?usp=sharing'
   },
   {
     label:
-      'Certification Scrum Fundamental (Intégration des principes Scrum dans les projets)'
+      'Certification Scrum Fundamental (Intégration des principes Scrum dans les projets)',
+    pic: scrum,
+    link: 'https://drive.google.com/file/d/1ObFDiu86tFUUDFir40dmRKcksfbQol85/view?usp=drive_link'
   }
 ];

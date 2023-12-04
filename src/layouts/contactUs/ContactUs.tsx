@@ -100,7 +100,12 @@ export default function ContactUs() {
   }, [emailSent]);
 
   return (
-    <Grid container sx={{ width: '100%', justifyContent: 'center' }}>
+    <Grid
+      container
+      marginTop={3}
+      marginBottom={2}
+      sx={{ width: '100%', justifyContent: 'center' }}
+    >
       <Grid item sx={{ marginBottom: 1, marginTop: 1 }}>
         {loading && <Loading isLoading={loading} loadingMsg={'Loading...'} />}
       </Grid>
@@ -306,7 +311,7 @@ export default function ContactUs() {
               fontWeight={400}
               color={theme.palette.secondary.main}
             >
-              STAY IN TOUCH WITH ME
+              RESTEZ EN CONTACT AVEC MOI
             </Typography>
             <Typography
               gutterBottom
@@ -315,7 +320,7 @@ export default function ContactUs() {
               fontWeight={500}
               color={main}
             >
-              Quick Contact
+              Contact rapide
             </Typography>
             <br />
             <Typography
@@ -323,7 +328,16 @@ export default function ContactUs() {
               fontWeight={'bold'}
               color={theme.palette.secondary.main}
             >
-              Just to say hi !!
+              Juste pour dire bonjour !
+            </Typography>
+            <br />
+            <Typography
+              fontSize={16}
+              fontWeight={500}
+              color={theme.palette.secondary.main}
+            >
+              Vous avez besoin d’un stagiaire ou d&apos;un alternant pour un de
+              vos projets ?
             </Typography>
             <br />
             <Typography
@@ -331,8 +345,8 @@ export default function ContactUs() {
               fontWeight={400}
               color={theme.palette.secondary.main}
             >
-              If you have any questions simply use the following contact
-              details.
+              Vous avez besoin d’une application web ou mobile qui vous
+              permettra de faire augmenter votre chiffre d’affaire ?
             </Typography>
             <br />
             <Typography
@@ -340,8 +354,7 @@ export default function ContactUs() {
               fontWeight={400}
               color={theme.palette.secondary.main}
             >
-              Business Owners to take their Online Presence to the next level.
-              We are in the business of Bulk SMS, Digital Marketing
+              Utilisez simplement les coordonnées suivantes.
             </Typography>
             <br />
           </Grid>
