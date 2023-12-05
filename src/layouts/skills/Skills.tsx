@@ -9,7 +9,7 @@ import {
   others,
   certificates
 } from '../../constants/skills.data';
-import CardSkills from '../../components/cards/CardSkills';
+import CardSkills from '../../components/cards/SkillsCard';
 
 const imageEnv_light = require('../../assets/env_light.png');
 const imageEnv_dark = require('../../assets/env_dark.png');
