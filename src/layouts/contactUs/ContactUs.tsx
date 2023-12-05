@@ -11,12 +11,11 @@ import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Phone } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import EmailIcon from '@mui/icons-material/Email';
 import { address, email, phoneNumber } from '../../constants/data';
 import Title from '../../components/title/Title';
-import { sendEmail } from '../../api/sendEmail.api';
+// import { sendEmail } from '../../api/sendEmail.api';
 import Loading from '../../components/loading/Loading';
 import TextInput from '../../components/forms/TextInput';
 import PrimaryButton from '../../components/forms/PrimaryButton';
@@ -49,45 +48,44 @@ export default function ContactUs() {
   const [inputError, setInputError] = useState(false);
   const [errorServer, setErrorServer] = useState(false);
 
-  const navigate = useNavigate();
-
   const handleCloseModal = () => {
     setEmailSent(false);
   };
   const submitForm = async (values: any) => {
     if (values?.fullName && values?.phone && values?.email && values?.message) {
-      await sendEmail(
-        values?.fullName,
-        values?.email,
-        values?.phone,
-        values?.message
-      )
-        .then(async (res: any) => {
-          if (res) {
-            setLoading(false);
-            if (res?.data?.data?.data?.sendEmail) {
-              setErrorServer(false);
-              setInputError(false);
-              setEmailSent(true);
-              setTimeout(() => {
-                navigate('/');
-              }, 3000);
-            } else {
-              setInputError(false);
-              setEmailSent(false);
-              setErrorServer(true);
-            }
-          } else {
-            setLoading(true);
-          }
-        })
-        .catch(
-          (err: any) => err
-          // console.log('Error: ', err);
-        );
+      // await sendEmail(
+      //   values?.fullName,
+      //   values?.email,
+      //   values?.phone,
+      //   values?.message
+      // )
+      //   .then(async (res: any) => {
+      //     if (res) {
+      setLoading(false);
+      //       if (res?.data?.data?.data?.sendEmail) {
+      //         setErrorServer(false);
+      //         setInputError(false);
+      setEmailSent(true);
+      //         setTimeout(() => {
+      //           navigate('/');
+      //         }, 3000);
+      //       } else {
+      //         setInputError(false);
+      //         setEmailSent(false);
+      //         setErrorServer(true);
+      //       }
+      //     } else {
+      //       setLoading(true);
+      //     }
+      //   })
+      //   .catch(
+      //     (err: any) => err
+      //     // console.log('Error: ', err);
+      //   );
     } else {
       setInputError(true);
       setErrorServer(false);
+      setEmailSent(false);
     }
   };
 
@@ -416,7 +414,7 @@ export default function ContactUs() {
                   letterSpacing: 0.5
                 }}
               >
-                Your message has been sent successfully
+                Votre message à bien été envoyé
               </Alert>
             </Grid>
           </Modal>

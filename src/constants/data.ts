@@ -21,4 +21,4 @@ export const Pages = [
   { link: '/contact', name: 'Contacts' }
 ];
 
-export const BASE_URL = 'https://lsu-tech-web-server-dev.herokuapp.com';
+export const BASE_URL = '';
