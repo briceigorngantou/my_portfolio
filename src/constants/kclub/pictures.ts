@@ -23,5 +23,6 @@ export const picturesKCLUB = [
   { pic: members },
   { pic: delivery }
 ];
-export const kclubWebsite = 'https://kabanatribe.com/';
-export const kclubApp = 'https://kclub.l-agence.digital/';
+export const kclubApp =
+  'https://play.google.com/store/apps/details?id=com.kclub.tribe&pcampaignid=web_share';
+export const kclubWebsite = 'https://kclub.l-agence.digital/';

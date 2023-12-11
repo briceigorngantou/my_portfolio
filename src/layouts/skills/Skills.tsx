@@ -7,7 +7,8 @@ import {
   languages,
   environnementDev,
   others,
-  certificates
+  certificates,
+  othersTools
 } from '../../constants/skills.data';
 import CardSkills from '../../components/cards/SkillsCard';
 
@@ -104,6 +105,19 @@ export default function Skills() {
             bgcolor={light}
             color={main}
             listItems={others}
+          />
+        </Grid>
+        <Grid sx={{ margin: 1 }}>
+          <CardSkills
+            title={'AUTRES OUTILS/MÉTHODES UTILISÉS'}
+            style={undefined}
+            picture={
+              theme.palette.mode === 'light' ? imageEnv_light : imageEnv_dark
+            }
+            width={550}
+            height={500}
+            color={main}
+            listItems={othersTools}
           />
         </Grid>
         <Grid sx={{ margin: 1 }}>

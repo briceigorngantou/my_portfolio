@@ -79,20 +79,20 @@ export const frameworks = [
     picture: reactNative
   },
   {
-    label: 'NodeJS',
-    picture: nodeJs
-  },
-  {
-    label: 'NestJS',
-    picture: nestJs
-  },
-  {
     label: 'Angular',
     picture: angular
   },
   {
     label: 'VueJs',
     picture: vueJs
+  },
+  {
+    label: 'NodeJS',
+    picture: nodeJs
+  },
+  {
+    label: 'NestJS',
+    picture: nestJs
   },
   {
     label: 'Laravel',
@@ -126,10 +126,6 @@ export const environnementDev = [
     picture: git
   },
   {
-    label: 'Office 365',
-    picture: office
-  },
-  {
     label: 'Figma',
     picture: figma
   },
@@ -160,10 +156,25 @@ export const environnementDev = [
   {
     label: 'Tableau',
     picture: tableau
-  },
+  }
+];
+
+export const othersTools = [
   {
     label: 'Slack',
     picture: slack
+  },
+  {
+    label: 'Office 365',
+    picture: office
+  },
+  {
+    label: 'Scrum',
+    picture: scrum
+  },
+  {
+    label: 'TDD/BDD',
+    picture: tdd
   }
 ];
 
@@ -185,16 +196,8 @@ export const others = [
     picture: nginx
   },
   {
-    label: 'Scrum',
-    picture: scrum
-  },
-  {
     label: 'Redux',
     picture: redux
-  },
-  {
-    label: 'TDD/BDD',
-    picture: tdd
   },
   {
     label: 'Jest',

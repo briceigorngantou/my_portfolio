@@ -57,7 +57,7 @@ export default function Header() {
           xs={6}
           sm={4}
           md={4}
-          sx={{ marginTop: 20, textAlign: 'left', width: '72%' }}
+          sx={{ marginTop: 20, textAlign: 'left', width: '72%', marginLeft: 5 }}
         >
           <Typography fontSize={24} fontWeight={400} color={main}>
             Salut !

@@ -8,7 +8,9 @@ import {
   contentST,
   missionLSU,
   missionOr,
-  missionST
+  missionST,
+  resultLSU,
+  resultST
 } from '../../constants/experiences.data';
 
 export default function MyExperience() {
@@ -48,6 +50,7 @@ export default function MyExperience() {
             mission={missionST}
             color={main}
             content={contentST}
+            result={resultST}
           />
         </Grid>
         <Grid sx={{ margin: 1 }}>
@@ -74,6 +77,7 @@ export default function MyExperience() {
             subtitle={'Entreprise de transformation digitale'}
             content={contentLSU}
             mission={missionLSU}
+            result={resultLSU}
             width={600}
             height={700}
             company={'LSU TECH'}

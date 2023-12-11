@@ -26,5 +26,6 @@ export const picturesHandIT = [
   { pic: detailPay_light }
 ];
 
-export const playStoreLinkHandIT = '';
-export const websiteLinkHandIT = '';
+export const playStoreLinkHandIT =
+  'https://play.google.com/store/apps/details?id=com.robynkwamo.HandleITapp';
+export const websiteLinkHandIT = '#';

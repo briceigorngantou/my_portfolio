@@ -5,13 +5,12 @@ export const citation =
   "`Une expérience bien conçue et bien conduite procure un plaisir comparable à celui qu'éprouve l'artisan devant un travail bien fait.`";
 export const auteur = 'La recherche passionnément (2001) de Pierre Joliot';
 export const github = 'https://github.com/briceigorngantou';
-export const linkedin =
-  'https://www.linkedin.com/in/brice-igor-ngantou-91a65023b/';
+export const linkedin = 'https://www.linkedin.com/in/brice-ngantou/';
 
 export const ecole_it_link = 'https://ecole-it.com/';
 
 export const cv =
-  'https://drive.google.com/file/d/1dkJlt0dTzNzE-YJKQlxRW6pue4J8IdG-/view?usp=drive_link';
+  'https://drive.google.com/file/d/1VIR-5johHgPNnjXr5lXqP1vClpQdkBFZ/view?usp=sharing';
 
 export const Pages = [
   { link: '/', name: 'Présentation' },
