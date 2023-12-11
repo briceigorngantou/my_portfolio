@@ -23,5 +23,6 @@ export const picturesReward = [
   { pic: members },
   { pic: delivery }
 ];
+export const rewardApp =
+  'https://play.google.com/store/apps/details?id=agdi.reward.society&pcampaignid=web_share';
 export const rewardWebsite = 'https://reward-society.l-agence.digital/accueil';
-export const rewardApp = 'https://reward-society.l-agence.digital/';

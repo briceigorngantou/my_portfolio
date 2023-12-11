@@ -26,7 +26,8 @@ export default function CardExperiences({
   height,
   color,
   content,
-  mission
+  mission,
+  result
 }: CardExperiencesInterface) {
   const minWidth625 = useMediaQuery('(min-width:625px)');
   const theme = useTheme();
@@ -135,6 +136,28 @@ export default function CardExperiences({
             </ul>
           ))}
         </Grid>
+        {result && (
+          <>
+            <br />
+            <Typography
+              fontWeight={500}
+              fontSize={16}
+              color={theme.palette.secondary.light}
+              whiteSpace={'nowrap'}
+            >
+              Résultats :
+            </Typography>
+            <Grid>
+              <ul>
+                <li>
+                  <Typography fontSize={16} color={theme.palette.primary.main}>
+                    {result}
+                  </Typography>
+                </li>
+              </ul>
+            </Grid>
+          </>
+        )}
       </CardContent>
     </Card>
   );

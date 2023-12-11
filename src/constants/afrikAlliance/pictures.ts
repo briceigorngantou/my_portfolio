@@ -14,5 +14,5 @@ export const picturesAfrik = [
   { pic: delivery }
 ];
 
-export const afrikWebsite = 'https://afrikalliance.l-agence.digital/';
-export const afrikApp = 'https://afrikalliance.l-agence.digital/login';
+export const afrikApp = 'https://afrikalliance.l-agence.digital/';
+export const afrikWebsite = 'https://afrikalliance.l-agence.digital/login';

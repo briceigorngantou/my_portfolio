@@ -12,6 +12,7 @@ export interface CardExperiencesInterface {
   height?: any;
   color?: string;
   mission?: string;
+  result?: string;
   bgcolor?: string;
   listItems?: any[];
   content?: any[];
