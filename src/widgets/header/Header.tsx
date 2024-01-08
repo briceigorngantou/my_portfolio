@@ -78,7 +78,7 @@ export default function Header() {
             >
               l&apos;ECOLE-IT
             </a>
-            &nbsp;à Orléans. Passionné par le developpement logiciel, je suis à
+            &nbsp;à Orléans. Passionné par le développement logiciel, je suis à
             la recherche d&apos;un stage ou d&apos;une alternance en
             développement web & mobile.
           </Typography>
