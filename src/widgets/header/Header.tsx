@@ -1,17 +1,16 @@
+/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
-import React from 'react';
 import {
+  Button,
   Grid,
   Typography,
-  useTheme,
-  Button,
-  Box,
-  useMediaQuery
+  useMediaQuery,
+  useTheme
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import './style.css';
 import { cv, ecole_it_link } from '../../constants/data';
+import './style.css';
 
 const profil_light = require('../../assets/profil_light.png');
 const profil_dark = require('../../assets/profil_dark.png');
@@ -70,7 +69,8 @@ export default function Header() {
           </Typography>
           <br />
           <Typography fontSize={16} fontWeight={400} color={main}>
-            Étudiant en master 1 systèmes d&apos;informations à&nbsp;
+            Étudiant en 4ième année d&apos;ingénierie des systèmes
+            informatiques, option Intelligence Artificielle à&nbsp;
             <a
               href={ecole_it_link}
               target="blank"
@@ -78,8 +78,9 @@ export default function Header() {
             >
               l&apos;ECOLE-IT
             </a>
-            &nbsp;à Orléans, je suis actuellement à la recherche d&apos;un stage
-            ou d&apos;une alternance en développement web & mobile.
+            &nbsp;à Orléans. Passionné par le developpement logiciel, je suis à
+            la recherche d&apos;un stage ou d&apos;une alternance en
+            développement web & mobile.
           </Typography>
           <br />
           <Typography fontSize={16} fontWeight={400} color={main}>

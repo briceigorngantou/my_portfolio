@@ -1,4 +1,4 @@
-export const address = 'Orleans, France';
+export const address = 'Île-de-France, Orléans';
 export const phoneNumber = '+33 781849423';
 export const email = 'briceigor1027@gmail.com';
 export const citation =
