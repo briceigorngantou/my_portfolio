@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Grid, useTheme } from '@mui/material';
+import { Box, CssBaseline } from '@mui/material';
 import Footer from '../../widgets/footer/Footer';
 import Header from '../../widgets/header/Header';
 import Navbar from '../../widgets/navbar/Navbar';
@@ -10,38 +10,26 @@ import MyPortfolio from '../../layouts/my.portfolio/MyPortfolio';
 import ContactUs from '../../layouts/contactUs/ContactUs';
 
 export default function Home() {
-  const theme = useTheme();
-  const { dark, main, light } = theme.palette.primary;
   return (
-    <Grid
-      container
-      sx={{
-        backgroundColor: theme.palette.mode === 'light' ? light : dark,
-        width: '100%',
-        justifyContent: 'center'
-      }}
-    >
-      <Grid item xs={12}>
-        <Navbar />
-      </Grid>
-      <Grid container item xs={12}>
+    <>
+      <CssBaseline />
+      <Navbar />
+      <Box component="section" id="accueil">
         <Header />
-      </Grid>
-      <Grid container item xs={12} bgcolor={theme.palette.background.paper}>
+      </Box>
+      <Box component="section" id="competences">
         <Skills />
-      </Grid>
-      <Grid container item xs={12}>
+      </Box>
+      <Box component="section" id="experiences">
         <MyExperience />
-      </Grid>
-      <Grid container item xs={12} bgcolor={theme.palette.background.paper}>
+      </Box>
+      <Box component="section" id="projets">
         <MyPortfolio />
-      </Grid>
-      <Grid container item xs={12}>
+      </Box>
+      <Box component="section" id="contact">
         <ContactUs />
-      </Grid>
-      <Grid item xs={12}>
-        <Footer />
-      </Grid>
-    </Grid>
+      </Box>
+      <Footer />
+    </>
   );
 }

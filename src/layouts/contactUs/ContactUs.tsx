@@ -1,425 +1,533 @@
 /* eslint-disable object-curly-newline */
 import {
   Alert,
+  Box,
+  Container,
   Grid,
+  IconButton,
   InputAdornment,
   Modal,
+  TextField,
   Typography,
   useTheme
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Phone } from '@mui/icons-material';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import EmailIcon from '@mui/icons-material/Email';
-import { address, email, phoneNumber } from '../../constants/data';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+import SendIcon from '@mui/icons-material/Send';
+import emailjs from '@emailjs/browser';
+import {
+  address,
+  email,
+  github,
+  linkedin,
+  phoneNumber
+} from '../../constants/data';
 import Title from '../../components/title/Title';
-// import { sendEmail } from '../../api/sendEmail.api';
 import Loading from '../../components/loading/Loading';
-import TextInput from '../../components/forms/TextInput';
-import PrimaryButton from '../../components/forms/PrimaryButton';
+
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || '';
+const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || '';
+const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || '';
 
 const validationSchema = Yup.object().shape({
-  fullName: Yup.string().required('fullName is required'),
-  email: Yup.string().email().required('email is required'),
+  fullName: Yup.string().required('Nom requis'),
+  email: Yup.string().email('Email invalide').required('Email requis'),
   phone: Yup.string(),
-  message: Yup.string().required('Message is required')
+  message: Yup.string().required('Message requis')
 });
-
-const modalStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 25,
-  p: 4,
-  borderRadius: 5,
-  backgroundColor: '#3AB37C'
-};
 
 export default function ContactUs() {
   const theme = useTheme();
-  const { main, light } = theme.palette.primary;
+  const isLight = theme.palette.mode === 'light';
+  const { main } = theme.palette.primary;
+  const accent = theme.palette.secondary.light;
+  const formRef = useRef<HTMLFormElement>(null);
   const [emailSent, setEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [inputError, setInputError] = useState(false);
-  const [errorServer, setErrorServer] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
-  const handleCloseModal = () => {
-    setEmailSent(false);
-  };
-  const submitForm = async (values: any) => {
-    if (values?.fullName && values?.phone && values?.email && values?.message) {
-      // await sendEmail(
-      //   values?.fullName,
-      //   values?.email,
-      //   values?.phone,
-      //   values?.message
-      // )
-      //   .then(async (res: any) => {
-      //     if (res) {
-      setLoading(false);
-      //       if (res?.data?.data?.data?.sendEmail) {
-      //         setErrorServer(false);
-      //         setInputError(false);
+  const submitForm = async (
+    values: { fullName: string; email: string; phone: string; message: string },
+    resetForm: () => void
+  ) => {
+    setLoading(true);
+    setSendError(false);
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: values.fullName,
+          from_email: values.email,
+          phone: values.phone || 'Non renseigné',
+          message: values.message
+        },
+        PUBLIC_KEY
+      );
       setEmailSent(true);
-      //         setTimeout(() => {
-      //           navigate('/');
-      //         }, 3000);
-      //       } else {
-      //         setInputError(false);
-      //         setEmailSent(false);
-      //         setErrorServer(true);
-      //       }
-      //     } else {
-      //       setLoading(true);
-      //     }
-      //   })
-      //   .catch(
-      //     (err: any) => err
-      //     // console.log('Error: ', err);
-      //   );
-    } else {
-      setInputError(true);
-      setErrorServer(false);
-      setEmailSent(false);
+      resetForm();
+    } catch {
+      setSendError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
+    let t: ReturnType<typeof setTimeout>;
     if (emailSent) {
-      setTimeout(() => {
-        setEmailSent(false);
-      }, 5000);
+      t = setTimeout(() => setEmailSent(false), 5000);
     }
+    return () => clearTimeout(t);
   }, [emailSent]);
 
-  return (
-    <Grid
-      container
-      marginTop={3}
-      marginBottom={2}
-      sx={{ width: '100%', justifyContent: 'center' }}
-    >
-      <Grid item sx={{ marginBottom: 1, marginTop: 1 }}>
-        {loading && <Loading isLoading={loading} loadingMsg={'Loading...'} />}
-      </Grid>
-      <Grid
-        sx={{ px: { xs: 2, md: 5 }, pb: { xs: 2, md: 3 } }}
-        container
-        p={2}
-        marginTop={10}
-        justifyContent="center"
-      >
-        <Title title="CONTACTS" />
-      </Grid>
-      {/*  START */}
-      <Grid
-        container
-        xs={12}
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        justifyContent="center"
-        sx={{ width: '100%' }}
-      >
-        <Grid item xs={6} sm={4} md={4} sx={{ margin: 2 }}>
-          <Grid
-            sx={{
-              textAlign: 'left',
-              width: '100%',
-              marginTop: '15%'
-            }}
-          >
-            <Grid item container direction="row" xs={12}>
-              {inputError && (
-                <Alert severity="error" sx={{ width: '100%' }}>
-                  Please enter all required information.
-                </Alert>
-              )}
-            </Grid>{' '}
-            <Grid item container direction="row" xs={12}>
-              {errorServer && (
-                <Alert severity="error" sx={{ width: '100%' }}>
-                  Sorry, an error occurred while processing your request. Please
-                  try again.
-                </Alert>
-              )}
-            </Grid>
-            <Formik
-              initialValues={{
-                email: '',
-                fullName: '',
-                phone: '',
-                message: ''
-              }}
-              validationSchema={validationSchema}
-              onSubmit={async (values) => {
-                setLoading(true);
-                // console.log(values);
-                await submitForm(values);
-              }}
-            >
-              {({ handleChange, handleSubmit, values, errors, touched }) => (
-                <Grid>
-                  <Grid item xs={12} sx={{ margin: 2 }}>
-                    <TextInput
-                      variant="standard"
-                      required
-                      // label="FULLNAME"
-                      placeholder="FULLNAME"
-                      value={values.fullName}
-                      fullWidth
-                      name="fullName"
-                      type="text"
-                      error={
-                        errors.fullName && touched.fullName
-                          ? errors.fullName
-                          : ''
-                      }
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            position="start"
-                            sx={{ marginRight: 1 }}
-                          >
-                            <PermIdentityIcon />
-                          </InputAdornment>
-                        )
-                      }}
-                      onChange={handleChange('fullName')}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sx={{ margin: 2 }}>
-                    <TextInput
-                      required
-                      variant="standard"
-                      // label="EMAIL"
-                      placeholder="EMAIL"
-                      value={values.email}
-                      fullWidth
-                      name="email"
-                      type="text"
-                      error={errors.email && touched.email ? errors.email : ''}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            position="start"
-                            sx={{ marginRight: 1 }}
-                          >
-                            <EmailIcon />
-                          </InputAdornment>
-                        )
-                      }}
-                      onChange={handleChange('email')}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sx={{ margin: 2 }}>
-                    <TextInput
-                      // label="PHONE"
-                      variant="standard"
-                      placeholder="PHONE"
-                      value={values.phone}
-                      type="tel"
-                      required={false}
-                      name="phone"
-                      error={errors.phone && touched.phone ? errors.phone : ''}
-                      fullWidth
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment
-                            position="start"
-                            sx={{ marginRight: 1 }}
-                          >
-                            <Phone />
-                          </InputAdornment>
-                        )
-                      }}
-                      onChange={handleChange('phone')}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sx={{ margin: 2 }}>
-                    <TextInput
-                      rows={5}
-                      variant="standard"
-                      multiline={true}
-                      // label={'MESSAGE'}
-                      type={'text'}
-                      placeholder="MESSAGE"
-                      fullWidth={true}
-                      onChange={handleChange('message')}
-                      value={values.message}
-                      name={'message'}
-                      required={true}
-                      error={
-                        errors.message && touched.message ? errors.message : ''
-                      }
-                    />
-                  </Grid>
-                  <Grid
-                    xs={12}
-                    sx={{
-                      justifyContent: 'left',
-                      margin: 2,
-                      marginBottom: 5,
-                      marginTop: 2
-                    }}
-                  >
-                    <PrimaryButton
-                      title="Send message"
-                      variant="outlined"
-                      fontSize={16}
-                      fontWeight={200}
-                      onPress={handleSubmit}
-                      // disabled={
-                      //   !values.email || !values.fullName || !values.message
-                      // }
-                      style={{
-                        width: '100%',
-                        height: 40,
-                        borderRadius: 1,
-                        borderColor: main,
-                        borderWidth: 0.1,
-                        color: light,
-                        backgroundColor: theme.palette.secondary.dark,
-                        ':hover': {
-                          color: theme.palette.secondary.dark,
-                          backgroundColor: light
-                        }
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-              )}
-            </Formik>
-          </Grid>
-        </Grid>
-        <Grid item xs={6} sm={4} md={4} sx={{ margin: 2 }}>
-          <Grid
-            sx={{
-              textAlign: 'left',
-              width: '100%',
-              marginTop: '15%'
-            }}
-          >
-            <Typography
-              fontSize={16}
-              fontWeight={400}
-              color={theme.palette.secondary.main}
-            >
-              RESTEZ EN CONTACT AVEC MOI
-            </Typography>
-            <Typography
-              gutterBottom
-              textAlign={'left'}
-              variant="h4"
-              fontWeight={500}
-              color={main}
-            >
-              Contact rapide
-            </Typography>
-            <br />
-            <Typography
-              fontSize={18}
-              fontWeight={'bold'}
-              color={theme.palette.secondary.main}
-            >
-              Juste pour dire bonjour !
-            </Typography>
-            <br />
-            <Typography
-              fontSize={16}
-              fontWeight={500}
-              color={theme.palette.secondary.main}
-            >
-              Vous avez besoin d’un stagiaire ou d&apos;un alternant pour un de
-              vos projets ?
-            </Typography>
-            <br />
-            <Typography
-              fontSize={16}
-              fontWeight={400}
-              color={theme.palette.secondary.main}
-            >
-              Vous avez besoin d’une application web ou mobile qui vous
-              permettra de faire augmenter votre chiffre d’affaire ?
-            </Typography>
-            <br />
-            <Typography
-              fontSize={16}
-              fontWeight={400}
-              color={theme.palette.secondary.main}
-            >
-              Utilisez simplement les coordonnées suivantes.
-            </Typography>
-            <br />
-          </Grid>
-          <Grid
-            sx={{
-              textAlign: 'left',
-              width: '100%',
-              marginBottom: '20%'
-            }}
-          >
-            <Typography
-              fontSize={16}
-              fontWeight={400}
-              color={theme.palette.secondary.main}
-            >
-              <strong>ADDRESS: </strong>
-              {address}
-            </Typography>
-            <Typography
-              fontSize={16}
-              fontWeight={400}
-              color={theme.palette.secondary.main}
-            >
-              <strong>EMAIL: </strong>
-              {email}
-            </Typography>
+  const inputSx = {
+    '& .MuiInputBase-root': {
+      borderRadius: 2,
+      fontFamily: 'Inter, sans-serif',
+      fontSize: 14,
+      color: main,
+      background: isLight ? 'rgba(79,142,247,0.04)' : 'rgba(255,255,255,0.03)',
+      '&:hover fieldset': { borderColor: accent },
+      '&.Mui-focused fieldset': { borderColor: accent }
+    },
+    '& .MuiInputLabel-root': {
+      fontFamily: 'Inter, sans-serif',
+      fontSize: 14,
+      color: isLight ? 'rgba(30,41,59,0.55)' : 'rgba(226,232,246,0.55)',
+      '&.Mui-focused': { color: accent }
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: isLight ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.08)'
+    }
+  };
 
-            <Typography
-              fontSize={16}
-              fontWeight={400}
-              color={theme.palette.secondary.main}
-            >
-              <strong>PHONE NUMBER: </strong>
-              {phoneNumber}
-            </Typography>
-          </Grid>
-        </Grid>
-        {emailSent && (
-          <Modal
-            open={emailSent}
-            onClose={handleCloseModal}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+  const contactInfo = [
+    { icon: <LocationOnOutlinedIcon fontSize="small" />, label: address },
+    {
+      icon: <EmailIcon fontSize="small" />,
+      label: email,
+      href: `mailto:${email}`
+    },
+    {
+      icon: <PhoneOutlinedIcon fontSize="small" />,
+      label: phoneNumber,
+      href: `tel:${phoneNumber}`
+    }
+  ];
+
+  return (
+    <Box
+      sx={{
+        py: { xs: 10, md: 14 },
+        background: isLight
+          ? 'linear-gradient(180deg, #EEF2FF 0%, #F8FAFF 100%)'
+          : 'linear-gradient(180deg, #0B0F1A 0%, #0E1626 100%)'
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box sx={{ textAlign: 'center', mb: 8 }}>
+          <Title title="PRENONS CONTACT" />
+          <Typography
+            sx={{
+              mt: 2,
+              fontSize: 15,
+              color: main,
+              opacity: 0.65,
+              maxWidth: 480,
+              mx: 'auto',
+              fontFamily: 'Inter, sans-serif',
+              lineHeight: 1.7
+            }}
           >
-            <Grid
-              container
-              sx={modalStyle}
-              textAlign="center"
-              justifyContent={'center'}
-              direction="column"
-            >
-              <Alert
-                severity="success"
+            Un projet, une opportunité ou juste un bonjour ?<br />
+            Je lis tous mes messages et réponds sous 24h.
+          </Typography>
+        </Box>
+
+        <Grid container spacing={5} alignItems="flex-start">
+          {/* Left: info */}
+          <Grid item xs={12} md={4}>
+            <Box sx={{ mb: 4 }}>
+              <Typography
                 sx={{
-                  backgroundColor: 'transparent',
-                  color: '#fff',
-                  fontSize: 14,
-                  fontWeight: 'bold',
-                  letterSpacing: 0.5
+                  fontSize: 22,
+                  fontWeight: 800,
+                  color: main,
+                  fontFamily: 'Inter, sans-serif',
+                  mb: 1
                 }}
               >
-                Votre message à bien été envoyé
-              </Alert>
-            </Grid>
-          </Modal>
-        )}
-      </Grid>
-    </Grid>
+                Discutons ensemble
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: 14,
+                  color: main,
+                  opacity: 0.65,
+                  fontFamily: 'Inter, sans-serif',
+                  lineHeight: 1.8
+                }}
+              >
+                Développeur Full Stack disponible pour vos projets web &amp;
+                mobile, collaborations techniques ou opportunités
+                professionnelles.
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 4 }}
+            >
+              {contactInfo.map((item, i) => (
+                <Box
+                  key={i}
+                  component={item.href ? 'a' : 'div'}
+                  href={item.href}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.5,
+                    textDecoration: 'none',
+                    color: main,
+                    opacity: 0.75,
+                    '&:hover': { opacity: 1, color: accent },
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 2,
+                      background: isLight
+                        ? 'rgba(79,142,247,0.08)'
+                        : 'rgba(237,185,111,0.08)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: accent,
+                      flexShrink: 0
+                    }}
+                  >
+                    {item.icon}
+                  </Box>
+                  <Typography
+                    sx={{
+                      fontSize: 13,
+                      fontFamily: 'Inter, sans-serif',
+                      fontWeight: 500
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+
+            <Typography
+              sx={{
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: 2,
+                textTransform: 'uppercase',
+                color: main,
+                opacity: 0.45,
+                fontFamily: 'Inter, sans-serif',
+                mb: 1.5
+              }}
+            >
+              Retrouvez-moi sur
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              <IconButton
+                component="a"
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  background: isLight ? '#fff' : '#1A2234',
+                  border: `1px solid ${
+                    isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.07)'
+                  }`,
+                  color: main,
+                  '&:hover': {
+                    color: '#0A66C2',
+                    background: 'rgba(10,102,194,0.1)',
+                    borderColor: '#0A66C230'
+                  },
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <LinkedInIcon fontSize="small" />
+              </IconButton>
+              <IconButton
+                component="a"
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  background: isLight ? '#fff' : '#1A2234',
+                  border: `1px solid ${
+                    isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.07)'
+                  }`,
+                  color: main,
+                  '&:hover': {
+                    color: isLight ? '#24292F' : '#fff',
+                    background: isLight
+                      ? 'rgba(36,41,47,0.08)'
+                      : 'rgba(255,255,255,0.08)',
+                    borderColor: isLight
+                      ? '#24292F30'
+                      : 'rgba(255,255,255,0.15)'
+                  },
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <GitHubIcon fontSize="small" />
+              </IconButton>
+            </Box>
+          </Grid>
+
+          {/* Right: form */}
+          <Grid item xs={12} md={8}>
+            <Box
+              ref={formRef}
+              sx={{
+                p: { xs: 3, md: 4 },
+                borderRadius: 4,
+                background: isLight ? '#FFFFFF' : '#1A2234',
+                border: `1px solid ${
+                  isLight ? 'rgba(79,142,247,0.10)' : 'rgba(255,255,255,0.05)'
+                }`,
+                boxShadow: isLight
+                  ? '0 4px 30px rgba(0,0,0,0.06)'
+                  : '0 4px 30px rgba(0,0,0,0.30)'
+              }}
+            >
+              {loading && (
+                <Loading isLoading={loading} loadingMsg="Envoi en cours..." />
+              )}
+              {sendError && (
+                <Alert
+                  severity="error"
+                  sx={{
+                    mb: 2,
+                    borderRadius: 2,
+                    fontFamily: 'Inter, sans-serif'
+                  }}
+                  onClose={() => setSendError(false)}
+                >
+                  Erreur lors de l&apos;envoi. Veuillez réessayer ou me
+                  contacter directement par email.
+                </Alert>
+              )}
+
+              <Formik
+                initialValues={{
+                  email: '',
+                  fullName: '',
+                  phone: '',
+                  message: ''
+                }}
+                validationSchema={validationSchema}
+                onSubmit={async (values, { resetForm }) => {
+                  await submitForm(values, resetForm);
+                }}
+              >
+                {({ handleChange, handleSubmit, values, errors, touched }) => (
+                  <Box
+                    component="form"
+                    sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}
+                  >
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Nom complet *"
+                          value={values.fullName}
+                          onChange={handleChange('fullName')}
+                          error={!!(errors.fullName && touched.fullName)}
+                          helperText={
+                            errors.fullName && touched.fullName
+                              ? errors.fullName
+                              : ''
+                          }
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <PermIdentityIcon
+                                  fontSize="small"
+                                  sx={{ color: accent, opacity: 0.7 }}
+                                />
+                              </InputAdornment>
+                            )
+                          }}
+                          sx={inputSx}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <TextField
+                          fullWidth
+                          label="Email *"
+                          value={values.email}
+                          onChange={handleChange('email')}
+                          error={!!(errors.email && touched.email)}
+                          helperText={
+                            errors.email && touched.email ? errors.email : ''
+                          }
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <EmailIcon
+                                  fontSize="small"
+                                  sx={{ color: accent, opacity: 0.7 }}
+                                />
+                              </InputAdornment>
+                            )
+                          }}
+                          sx={inputSx}
+                        />
+                      </Grid>
+                    </Grid>
+
+                    <TextField
+                      fullWidth
+                      label="Téléphone"
+                      value={values.phone}
+                      onChange={handleChange('phone')}
+                      type="tel"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Phone
+                              fontSize="small"
+                              sx={{ color: accent, opacity: 0.7 }}
+                            />
+                          </InputAdornment>
+                        )
+                      }}
+                      sx={inputSx}
+                    />
+
+                    <TextField
+                      fullWidth
+                      multiline
+                      rows={5}
+                      label="Votre message *"
+                      value={values.message}
+                      onChange={handleChange('message')}
+                      error={!!(errors.message && touched.message)}
+                      helperText={
+                        errors.message && touched.message ? errors.message : ''
+                      }
+                      sx={inputSx}
+                    />
+
+                    <Box
+                      onClick={() => handleSubmit()}
+                      sx={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 1,
+                        px: 4,
+                        py: 1.6,
+                        borderRadius: 2,
+                        background: 'linear-gradient(135deg, #4F8EF7, #8B5CF6)',
+                        color: '#fff',
+                        fontWeight: 700,
+                        fontSize: 14,
+                        fontFamily: 'Inter, sans-serif',
+                        cursor: 'pointer',
+                        boxShadow: '0 6px 24px rgba(79,142,247,0.35)',
+                        alignSelf: 'flex-start',
+                        '&:hover': {
+                          background:
+                            'linear-gradient(135deg, #3B7FEF, #7C3AED)',
+                          boxShadow: '0 10px 30px rgba(79,142,247,0.45)',
+                          transform: 'translateY(-1px)'
+                        },
+                        transition: 'all 0.22s ease'
+                      }}
+                    >
+                      <SendIcon sx={{ fontSize: 16 }} />
+                      Envoyer le message
+                    </Box>
+                  </Box>
+                )}
+              </Formik>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Modal open={emailSent} onClose={() => setEmailSent(false)}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: { xs: 300, sm: 420 },
+            background: isLight ? '#FFFFFF' : '#1A2234',
+            borderRadius: 4,
+            p: 4,
+            textAlign: 'center',
+            boxShadow: '0 30px 80px rgba(0,0,0,0.25)',
+            border: `1px solid ${
+              isLight ? 'rgba(34,197,94,0.20)' : 'rgba(34,197,94,0.15)'
+            }`
+          }}
+        >
+          <Box
+            sx={{
+              width: 60,
+              height: 60,
+              borderRadius: '50%',
+              background: 'rgba(34,197,94,0.12)',
+              border: '1px solid rgba(34,197,94,0.25)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              mx: 'auto',
+              mb: 2,
+              fontSize: 28
+            }}
+          >
+            ✓
+          </Box>
+          <Typography
+            sx={{
+              fontSize: 18,
+              fontWeight: 700,
+              color: '#16A34A',
+              fontFamily: 'Inter, sans-serif',
+              mb: 1
+            }}
+          >
+            Message envoyé !
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: 14,
+              color: main,
+              opacity: 0.7,
+              fontFamily: 'Inter, sans-serif'
+            }}
+          >
+            Merci pour votre message. Je vous répondrai dans les plus brefs
+            délais.
+          </Typography>
+        </Box>
+      </Modal>
+    </Box>
   );
 }

@@ -1,187 +1,235 @@
-/* eslint-disable object-curly-newline */
 /* eslint-disable no-unused-vars */
-import React, { Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import {
+  Box,
   Container,
-  Grid,
+  Divider,
+  IconButton,
   Typography,
-  useMediaQuery,
   useTheme
 } from '@mui/material';
-
-import {
-  email,
-  linkedin,
-  github,
-  citation,
-  auteur,
-  phoneNumber,
-  address
-} from '../../constants/data';
-import './style.css';
-import LabelIcon from '../../components/labelIcon/LabelIcon';
-
-const logo_light = require('../../assets/logo_light.png');
-const logo_dark = require('../../assets/logo_dark.png');
-const phoneIcon = require('../../assets/phone-calling-svgrepo-com.png');
-const addressIcon = require('../../assets/address-svgrepo-com.png');
-const address_dark = require('../../assets/address_dark.png');
-const emailIcon = require('../../assets/email-mail-svgrepo-com.png');
-const linkedinIcon = require('../../assets/linkedin-svgrepo-com.png');
-const githubIcon = require('../../assets/github-color-svgrepo-com.png');
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import { email, github, linkedin, navLinks } from '../../constants/data';
+import { scrollToSection } from '../../utils/scroll';
 
 export default function Footer() {
-  const navigate = useNavigate();
   const theme = useTheme();
-  const minWidth600 = useMediaQuery('(min-width:600px)');
-  const { dark, main, light } = theme.palette.primary;
-  const bgcolor = theme.palette.background.paper;
+  const isLight = theme.palette.mode === 'light';
+  const { main } = theme.palette.primary;
+  const accent = theme.palette.secondary.light;
 
   return (
-    <Fragment>
-      <Container
-        component="div"
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          bottom: 1,
-          padding: 5,
-          maxWidth: 2000,
-          backgroundColor: bgcolor
-        }}
-        className="footer"
-      >
-        <Grid container xs={12} spacing={3}>
-          <Grid xs={6}>
-            <Grid
-              item
+    <Box
+      sx={{
+        background: isLight ? '#F0F4FF' : '#080C18',
+        borderTop: `1px solid ${
+          isLight ? 'rgba(79,142,247,0.12)' : 'rgba(255,255,255,0.06)'
+        }`
+      }}
+    >
+      <Container maxWidth="lg" sx={{ py: { xs: 5, md: 6 } }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            alignItems: { xs: 'center', md: 'flex-start' },
+            justifyContent: 'space-between',
+            gap: 4,
+            mb: 4
+          }}
+        >
+          {/* Brand */}
+          <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+            <Box
+              onClick={() => scrollToSection('accueil')}
               sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1.5,
                 cursor: 'pointer',
-                color: main,
-                textAlign: 'center',
-                width: '80%'
+                mb: 1.5,
+                '&:hover': { opacity: 0.82 },
+                transition: 'opacity 0.2s'
               }}
             >
-              <img
-                src={theme.palette.mode === 'light' ? logo_light : logo_dark}
-                alt="logo"
-                onClick={() => navigate('/')}
-                style={{ width: '20%' }}
-              />
-            </Grid>
+              <Box
+                sx={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 2,
+                  background: 'linear-gradient(135deg, #4F8EF7, #8B5CF6)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 4px 14px rgba(79,142,247,0.30)'
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: '#fff',
+                    fontWeight: 900,
+                    fontSize: 13,
+                    fontFamily: 'Inter, sans-serif'
+                  }}
+                >
+                  BN
+                </Typography>
+              </Box>
+              <Typography
+                sx={{
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: main,
+                  fontFamily: 'Inter, sans-serif'
+                }}
+              >
+                Brice Ngantou
+              </Typography>
+            </Box>
             <Typography
               sx={{
+                fontSize: 13,
                 color: main,
-                textAlign: 'center',
-                width: '80%'
+                opacity: 0.55,
+                maxWidth: 240,
+                lineHeight: 1.7,
+                fontFamily: 'Inter, sans-serif'
               }}
             >
-              {citation}
-              <Typography fontWeight={'bold'}>{auteur}</Typography>
+              Développeur Full Stack & Mobile
+              <br />
+              Basé en Île-de-France, France
             </Typography>
-          </Grid>
-          <Grid xs={3}>
-            <Grid
-              item
-              sx={{
-                color: main,
-                textAlign: 'left',
-                marginBottom: 3
-              }}
-            >
-              <Typography fontWeight={'bold'} fontSize={20}>
-                Mes contacts
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              sx={{
-                color: main,
-                justifyContent: 'center',
-                marginBottom: 3
-              }}
-            >
-              <LabelIcon
-                iconImage={phoneIcon}
-                mode={theme.palette.mode}
-                label={phoneNumber}
-                uri={`tel: ${phoneNumber}`}
-              />
-              <LabelIcon
-                iconImage={emailIcon}
-                mode={theme.palette.mode}
-                label={email}
-                uri={`mailTo: ${email}`}
-              />
-              <LabelIcon
-                iconImage={
-                  theme.palette.mode === 'light' ? addressIcon : address_dark
-                }
-                mode={theme.palette.mode}
-                label={address}
-              />
-              {!minWidth600 && (
-                <>
-                  <LabelIcon
-                    iconImage={linkedinIcon}
-                    mode={theme.palette.mode}
-                    uri={linkedin}
-                  />
-                  <LabelIcon
-                    iconImage={githubIcon}
-                    mode={theme.palette.mode}
-                    uri={github}
-                  />
-                </>
-              )}
-            </Grid>
-          </Grid>
-          {minWidth600 && (
-            <Grid xs={3}>
-              <Grid
-                item
+          </Box>
+
+          {/* Nav links */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: { xs: 2, md: 3 },
+              justifyContent: 'center'
+            }}
+          >
+            {navLinks.map((link) => (
+              <Box
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
                 sx={{
+                  cursor: 'pointer',
                   color: main,
-                  textAlign: 'left',
-                  marginBottom: 3
+                  opacity: 0.65,
+                  fontSize: 14,
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 500,
+                  '&:hover': { color: accent, opacity: 1 },
+                  transition: 'all 0.2s ease'
                 }}
               >
-                <Typography fontWeight={'bold'} fontSize={20}>
-                  Mes réseaux
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                sx={{
-                  color: main,
-                  textAlign: 'left',
-                  marginBottom: 3,
-                  flexDirection: 'row',
-                  display: 'flex'
-                }}
-              >
-                <LabelIcon
-                  iconImage={linkedinIcon}
-                  mode={theme.palette.mode}
-                  uri={linkedin}
-                />
-                <LabelIcon
-                  iconImage={githubIcon}
-                  mode={theme.palette.mode}
-                  uri={github}
-                />
-              </Grid>
-            </Grid>
-          )}
-          <Grid item container justifyContent="center" width={'90%'}>
-            <Typography variant="body1" align="center" color={main}>
-              &copy;{new Date().getFullYear()} Tout droit reservé à &nbsp;Brice
-              NGANTOU
-            </Typography>
-          </Grid>
-        </Grid>
+                {link.label}
+              </Box>
+            ))}
+          </Box>
+
+          {/* Social links */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1
+            }}
+          >
+            <IconButton
+              component="a"
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                color: main,
+                opacity: 0.7,
+                background: isLight
+                  ? 'rgba(0,0,0,0.04)'
+                  : 'rgba(255,255,255,0.04)',
+                '&:hover': {
+                  color: '#0A66C2',
+                  opacity: 1,
+                  background: 'rgba(10,102,194,0.1)'
+                },
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <LinkedInIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              component="a"
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                color: main,
+                opacity: 0.7,
+                background: isLight
+                  ? 'rgba(0,0,0,0.04)'
+                  : 'rgba(255,255,255,0.04)',
+                '&:hover': {
+                  color: isLight ? '#24292F' : '#fff',
+                  opacity: 1,
+                  background: isLight
+                    ? 'rgba(36,41,47,0.1)'
+                    : 'rgba(255,255,255,0.1)'
+                },
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <GitHubIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              component="a"
+              href={`mailto:${email}`}
+              sx={{
+                color: main,
+                opacity: 0.7,
+                background: isLight
+                  ? 'rgba(0,0,0,0.04)'
+                  : 'rgba(255,255,255,0.04)',
+                '&:hover': {
+                  color: accent,
+                  opacity: 1,
+                  background: isLight
+                    ? 'rgba(79,142,247,0.1)'
+                    : 'rgba(237,185,111,0.1)'
+                },
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <EmailOutlinedIcon fontSize="small" />
+            </IconButton>
+          </Box>
+        </Box>
+
+        <Divider
+          sx={{
+            borderColor: isLight
+              ? 'rgba(0,0,0,0.07)'
+              : 'rgba(255,255,255,0.06)',
+            mb: 3
+          }}
+        />
+
+        <Typography
+          sx={{
+            textAlign: 'center',
+            fontSize: 13,
+            color: main,
+            opacity: 0.45,
+            fontFamily: 'Inter, sans-serif'
+          }}
+        >
+          © {new Date().getFullYear()} Brice Ngantou - Tous droits réservés
+        </Typography>
       </Container>
-    </Fragment>
+    </Box>
   );
 }

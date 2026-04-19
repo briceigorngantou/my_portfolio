@@ -50,7 +50,9 @@ module.exports = {
       }
     ],
     camelcase: 0,
-    'operator-linebreak': 0
+    'operator-linebreak': 0,
+    'object-curly-newline': 0,
+    'no-nested-ternary': 0
   },
   settings: {
     react: {

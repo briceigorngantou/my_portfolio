@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npx prettier *)",
+      "Bash(grep \"src\\\\\\\\\")",
+      "Bash(cat .prettierrc)",
+      "Bash(cat .prettierrc.json)"
+    ]
+  }
+}

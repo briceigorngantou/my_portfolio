@@ -16,4 +16,5 @@ export interface CardExperiencesInterface {
   bgcolor?: string;
   listItems?: any[];
   content?: any[];
+  isCurrent?: boolean;
 }

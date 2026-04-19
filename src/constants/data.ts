@@ -1,4 +1,7 @@
-export const address = 'Île-de-France, Orléans';
+// eslint-disable-next-line import/no-unresolved
+import cvPdf from '../assets/CV Brice Ngantou.pdf';
+
+export const address = 'Île-de-France, France';
 export const phoneNumber = '+33 781849423';
 export const email = 'briceigor1027@gmail.com';
 export const citation =
@@ -6,11 +9,17 @@ export const citation =
 export const auteur = 'La recherche passionnément (2001) de Pierre Joliot';
 export const github = 'https://github.com/briceigorngantou';
 export const linkedin = 'https://www.linkedin.com/in/brice-ngantou/';
-
 export const ecole_it_link = 'https://ecole-it.com/';
 
-export const cv =
-  'https://drive.google.com/file/d/1VIR-5johHgPNnjXr5lXqP1vClpQdkBFZ/view?usp=sharing';
+export const cv = cvPdf;
+
+export const navLinks = [
+  { id: 'accueil', label: 'Accueil' },
+  { id: 'competences', label: 'Compétences' },
+  { id: 'experiences', label: 'Expériences' },
+  { id: 'projets', label: 'Projets' },
+  { id: 'contact', label: 'Contact' }
+];
 
 export const Pages = [
   { link: '/', name: 'Présentation' },

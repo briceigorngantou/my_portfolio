@@ -1,3 +1,23 @@
+// LINNOVLAB
+export const contentLinnovLab = [
+  {
+    label:
+      "Développement et optimisation d'un écosystème digital complet : caisse enregistreuse, bornes de commande, écrans de production cuisine et PLV dynamique"
+  },
+  {
+    label:
+      "Conception d'une architecture modulaire et scalable avec NodeJs en backend, React Js et Tailwind CSS pour le frontend, Flutter pour les applications mobiles"
+  },
+  {
+    label:
+      'Déploiement des pipelines CI/CD optimisés, administration des bases de données MySQL/MongoDB, et monitoring via Sentry'
+  }
+];
+export const missionLinnovLab =
+  "Développement et optimisation d'un écosystème digital complet pour la gestion des restaurants";
+export const resultLinnovLab =
+  'Plateforme complète en production : caisse enregistreuse, bornes de commande interactives, écrans de production cuisine et affichage PLV dynamique.';
+
 // STD
 export const contentST = [
   {

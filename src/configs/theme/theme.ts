@@ -1,19 +1,19 @@
 export const colorsTokens = {
   primary: {
-    100: '#F3F4F6',
+    100: '#EEF2FF',
     200: '#FFFFFF',
-    300: '#4b4b4b',
-    400: '#000000',
-    500: '#f1f7fc',
-    600: '#222222',
-    700: '#2196f3'
+    300: '#1E293B',
+    400: '#0F172A',
+    500: '#F8FAFF',
+    600: '#12182B',
+    700: '#4F8EF7'
   },
   grey: {
-    100: '#f1f7fc',
-    200: '#000000',
-    300: '#474245',
-    400: '#4b4b4b',
-    500: '#212121',
+    100: '#F8FAFF',
+    200: '#0B0F1A',
+    300: '#1A2234',
+    400: '#2C3A52',
+    500: '#0B0F1A',
     600: '#EDB96F'
   }
 };
@@ -24,8 +24,8 @@ export const themeSettings = (mode: any) => ({
     ...(mode === 'dark'
       ? {
           primary: {
-            dark: colorsTokens.primary[600],
-            main: colorsTokens.primary[100],
+            dark: colorsTokens.grey[300],
+            main: '#E2E8F6',
             light: colorsTokens.primary[200]
           },
           secondary: {
@@ -39,49 +39,54 @@ export const themeSettings = (mode: any) => ({
           }
         }
       : {
-          // palette values for light mode
           primary: {
             dark: colorsTokens.primary[400],
             main: colorsTokens.primary[300],
             light: colorsTokens.primary[200]
           },
           secondary: {
-            dark: colorsTokens.grey[300],
-            main: colorsTokens.grey[300],
+            dark: '#334155',
+            main: '#334155',
             light: colorsTokens.primary[700]
           },
           background: {
-            default: colorsTokens.grey[300],
+            default: colorsTokens.primary[100],
             paper: colorsTokens.primary[500]
           }
         })
   },
   typography: {
-    fontFamily: ['Rubik', 'sans-serif'].join(','),
+    fontFamily: ['Inter', 'Rubik', 'sans-serif'].join(','),
     fontSize: 12,
     h1: {
-      fontFamily: ['Rubik', 'sans-serif'].join(','),
-      fontSize: 40
+      fontFamily: ['Inter', 'Rubik', 'sans-serif'].join(','),
+      fontSize: 48,
+      fontWeight: 800
     },
     h2: {
-      fontFamily: ['Rubik', 'sans-serif'].join(','),
-      fontSize: 32
+      fontFamily: ['Inter', 'Rubik', 'sans-serif'].join(','),
+      fontSize: 36,
+      fontWeight: 700
     },
     h3: {
-      fontFamily: ['Rubik', 'sans-serif'].join(','),
-      fontSize: 24
+      fontFamily: ['Inter', 'Rubik', 'sans-serif'].join(','),
+      fontSize: 28,
+      fontWeight: 700
     },
     h4: {
-      fontFamily: ['Rubik', 'sans-serif'].join(','),
-      fontSize: 20
+      fontFamily: ['Inter', 'Rubik', 'sans-serif'].join(','),
+      fontSize: 22,
+      fontWeight: 600
     },
     h5: {
-      fontFamily: ['Rubik', 'sans-serif'].join(','),
-      fontSize: 16
+      fontFamily: ['Inter', 'Rubik', 'sans-serif'].join(','),
+      fontSize: 18,
+      fontWeight: 500
     },
     h6: {
-      fontFamily: ['Rubik', 'sans-serif'].join(','),
-      fontSize: 14
+      fontFamily: ['Inter', 'Rubik', 'sans-serif'].join(','),
+      fontSize: 14,
+      fontWeight: 500
     }
   }
 });
